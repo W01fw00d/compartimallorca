@@ -1,0 +1,51 @@
+<SimpleRoutes>
+	<SimpleRoute n="0">
+		<From name="Palma"/>
+		<From name="Aeropuerto"/>
+	</SimpleRoute>
+
+	<SimpleRoute n="1">
+		<From name="Palma"/>
+		<From name="Inca"/>
+	</SimpleRoute>
+
+	<SimpleRoute n="2">
+		<From name="Inca"/>
+		<From name="Alcúdia"/>
+	</SimpleRoute>
+	 
+	<SimpleRoute n="3">
+		<From name="Aeropuerto"/>
+		<From name="Campos"/>
+	</SimpleRoute>
+	
+	<SimpleRoute n="4">
+		<From name="Campos"/>
+		<From name="Manacor"/>
+	</SimpleRoute>
+	
+	<SimpleRoute n="5">
+		<From name="Palma"/>
+		<From name="Manacor"/>
+	</SimpleRoute>
+	
+	<SimpleRoute n="6">
+		<From name="Inca"/>
+		<From name="Manacor"/>
+	</SimpleRoute>
+	
+	<SimpleRoute n="7">
+		<From name="Palma"/>
+		<From name="Banyalbufar"/>
+	</SimpleRoute>
+	
+	<SimpleRoute n="8">
+		<From name="Banyalbufar"/>
+		<From name="Sòller"/>
+	</SimpleRoute>
+	
+	<SimpleRoute n="9">
+		<From name="Palma"/>
+		<From name="Sòller"/>
+	</SimpleRoute>
+</SimpleRoutes>

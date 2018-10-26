@@ -1,0 +1,1 @@
+- Configurar el juego a resolución 1280 x 720
