@@ -10,12 +10,22 @@ class Draggable :
 {
     private Color mouseOverColor = new Color(0, 1, 0.5f, 1);
     private Color originalColor;
-    private bool dragging = false;
+    public bool dragging = false;
     private float distance;
 
     void Start()
     {
         originalColor = GetComponent<Image>().color;
+    }
+
+    public void Update()
+    {
+        if (dragging)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 rayPoint = ray.GetPoint(distance);
+            transform.position = rayPoint;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -39,28 +49,13 @@ class Draggable :
         dragging = false;
     }
 
-    public void Update()
-    {
-        if (dragging)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Vector3 rayPoint = ray.GetPoint(distance);
-            transform.position = rayPoint;
-        }
-    }
-
     public void OnTriggerStay2D(Collider2D collider)
     {
         //Debug.Log("OnTriggerStay2D");
 
         if (!dragging)
         {
-            var thisCardAvatar = transform.FindObjectsWithTag("CharacterAvatar")[0].gameObject.GetComponent<Image>().sprite;
-            collider.gameObject.transform.FindObjectsWithTag("SeatSlot")[0].gameObject.GetComponent<Image>().sprite = thisCardAvatar;
-
             gameObject.SetActive(false);
-
-            collider.gameObject.GetComponent<Expirable>().launch();
         }
     }
 }

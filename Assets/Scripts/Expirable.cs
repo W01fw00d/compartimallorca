@@ -2,14 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Expirable : MonoBehaviour {
+public class Expirable : 
+    MonoBehaviour,
+    IPointerEnterHandler, IPointerExitHandler
+{
     public int n_seatSlots = 3;
     public float expirates_in = 60.0f;
 
     private Text timerText;
     private float timerColorChangeLimit = 10.0f;
     private Color red = new Color(0.8f, 0, 0, 1);
+
+    private Color originalColor;
+    private Color mouseOverColor = new Color(1, 0.53f, 0, 1);
 
     //private int[,] complex_route = new int[,] {
     //    { 1, 2 },
@@ -18,25 +25,13 @@ public class Expirable : MonoBehaviour {
     //    { 7, 8 }
     //};
 
-    public void launch()
-    {
-        animateMovement(-1);
-    }
-
-    private void fall()
-    {
-        animateMovement(1);
-    }
-
-    private void animateMovement(int gravity)
-    {
-        gameObject.GetComponent<Rigidbody2D>().gravityScale = gravity;
-        Invoke("resetObject", 10.0f);
-    }
-
     void Start() {
-        GameObject slots_wrapper = gameObject.transform.Find("SeatsSlotsWrapper").gameObject;
-        timerText = gameObject.transform.Find("TimerText").gameObject.GetComponent<Text>();
+        originalColor = GetComponent<Image>().color;
+
+        Transform panel = gameObject.transform.Find("Panel");
+
+        Transform slots_wrapper = panel.Find("SeatsSlotsWrapper");
+        timerText = panel.Find("TimerText").gameObject.GetComponent<Text>();
 
         for (int i = 1; i <= n_seatSlots; i++)
         {
@@ -46,6 +41,35 @@ public class Expirable : MonoBehaviour {
 
     void Update () {
         updateTimerText();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        GetComponent<Image>().color = mouseOverColor;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        GetComponent<Image>().color = originalColor;
+    }
+
+    public void OnTriggerStay2D(Collider2D collider)
+    {
+        if (!collider.gameObject.GetComponent<Draggable>().dragging)
+        {
+            var colliderCardAvatar = collider.gameObject.transform.FindObjectsWithTag("CharacterAvatar")[0].gameObject.GetComponent<Image>().sprite;
+            transform.FindObjectsWithTag("SeatSlot")[0].gameObject.GetComponent<Image>().sprite = colliderCardAvatar;
+
+            launch();
+        } else
+        {
+            GetComponent<Image>().color = mouseOverColor;
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        GetComponent<Image>().color = originalColor;
     }
 
     private void updateTimerText()
@@ -71,5 +95,21 @@ public class Expirable : MonoBehaviour {
     {
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         gameObject.SetActive(false);
+    }
+
+    public void launch()
+    {
+        animateMovement(-1);
+    }
+
+    private void fall()
+    {
+        animateMovement(1);
+    }
+
+    private void animateMovement(int gravity)
+    {
+        gameObject.GetComponent<Rigidbody2D>().gravityScale = gravity;
+        Invoke("resetObject", 10.0f);
     }
 }
