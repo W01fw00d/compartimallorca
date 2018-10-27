@@ -17,7 +17,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - MapPoints
   - 
   - 
   - 
@@ -42,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 251985533
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

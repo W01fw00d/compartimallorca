@@ -8,6 +8,9 @@ class Draggable :
     MonoBehaviour,
     IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
+    private float xOriginal;
+    private float yOriginal;
+
     private Color mouseOverColor = new Color(0, 1, 0.5f, 1);
     private Color originalColor;
     public bool dragging = false;
@@ -16,6 +19,8 @@ class Draggable :
     void Start()
     {
         originalColor = GetComponent<Image>().color;
+        xOriginal = transform.position.x;
+        yOriginal = transform.position.y;
     }
 
     public void Update()
@@ -47,6 +52,12 @@ class Draggable :
     public void OnPointerUp(PointerEventData eventData)
     {
         dragging = false;
+        Invoke("ResetPosition", 2.0f);
+    }
+
+    private void ResetPosition()
+    {
+        transform.SetPositionAndRotation(new Vector3(xOriginal, yOriginal, 0), new Quaternion());
     }
 
     public void OnTriggerStay2D(Collider2D collider)

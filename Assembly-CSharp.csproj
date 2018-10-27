@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CardFactory.cs" />
+    <Compile Include="Assets\Scripts\CitiesPainter.cs" />
     <Compile Include="Assets\Scripts\Draggable.cs" />
     <Compile Include="Assets\Scripts\Expirable.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />

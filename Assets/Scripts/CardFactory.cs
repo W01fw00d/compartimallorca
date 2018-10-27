@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CardFactory : MonoBehaviour {
 
-    private int nCarCardsLimit = 5;
-    private int nPeopleCardsLimit = 5;
+    //private int nCarCardsLimit = 5;
+    //private int nPeopleCardsLimit = 5;
 
     // Use this for initialization
     void Start () {
