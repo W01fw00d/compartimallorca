@@ -17,11 +17,18 @@ public class CitiesPainter : MonoBehaviour {
     private Transform begin;
     private Transform end;
 
-    private Color complexRouteStartColor = new Color(0, 0.08235294f, 0.6705883f, 1); //blue
-    private Color complexRouteEndColor = new Color(0, 0.5294118f, 0.01176471f, 1); //green
+    
+    private Color complexRouteStartColor = new Color(1, 0.3372549f, 0, 1); //orange
+    private Color complexRouteEndColor = new Color(1, 0, 0, 1); //red
 
-    private Color simpleRouteStartColor = new Color(1, 0, 0.9130435f, 1); //pink
-    private Color simpleRouteEndColor = new Color(1, 0.3377618f, 0, 1); //orange
+    //private Color complexRouteStartColor = new Color(0, 0.08235294f, 0.6705883f, 1); //blue
+    //private Color complexRouteEndColor = new Color(0, 0.5294118f, 0.01176471f, 1); //green
+
+        
+    private Color simpleRouteStartColor = new Color(0.2745098f, 0.882353f, 0.8196079f, 1); //turquose
+    private Color simpleRouteEndColor = new Color(0.03137255f, 0.5254902f, 0.04313726f, 1); //green
+    //private Color simpleRouteStartColor = new Color(1, 0, 0.9130435f, 1); //pink
+    //private Color simpleRouteEndColor = new Color(1, 0.3377618f, 0, 1); //orange
 
     // Use this for initialization
     void Start()
