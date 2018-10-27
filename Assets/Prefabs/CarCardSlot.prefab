@@ -325,7 +325,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lorem Ipsum
+  m_Text: Palma
 --- !u!114 &114067647416020286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -485,7 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   n_seatSlots: 3
-  expirates_in: 60
+  expirates_in: 15
 --- !u!114 &114464853225036824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -599,7 +599,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lorem Ipsum
+  m_Text: "Alc\xFAdia"
 --- !u!114 &114700728446907804
 MonoBehaviour:
   m_ObjectHideFlags: 1

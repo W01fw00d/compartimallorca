@@ -16,7 +16,9 @@ public class Expirable :
     private Color red = new Color(0.8f, 0, 0, 1);
 
     private Color originalColor;
-    private Color mouseOverColor = new Color(1, 0.53f, 0, 1);
+    //private Color mouseOverColor = new Color(1, 0.53f, 0, 1); //orange
+    private Color mouseOverColor = new Color(1, 1, 0, 1); //yellow
+
 
     //private int[,] complex_route = new int[,] {
     //    { 1, 2 },
@@ -28,7 +30,7 @@ public class Expirable :
     void Start() {
         originalColor = GetComponent<Image>().color;
 
-        Transform panel = gameObject.transform.Find("Panel");
+        Transform panel = gameObject.transform.Find("CharacterAvatar");
 
         Transform slots_wrapper = panel.Find("SeatsSlotsWrapper");
         timerText = panel.Find("TimerText").gameObject.GetComponent<Text>();
@@ -57,7 +59,10 @@ public class Expirable :
     {
         if (!collider.gameObject.GetComponent<Draggable>().dragging)
         {
-            var colliderCardAvatar = collider.gameObject.transform.FindObjectsWithTag("CharacterAvatar")[0].gameObject.GetComponent<Image>().sprite;
+            Debug.Log(collider.gameObject.transform.FindObjectsWithTag("CharacterAvatar").Count);
+
+            var colliderCardAvatar =
+                collider.gameObject.transform.FindObjectsWithTag("CharacterAvatar")[0].gameObject.GetComponent<Image>().sprite;
             transform.FindObjectsWithTag("SeatSlot")[0].gameObject.GetComponent<Image>().sprite = colliderCardAvatar;
 
             launch();
@@ -82,7 +87,7 @@ public class Expirable :
         } else
         {
             expirates_in -= Time.deltaTime;
-            timerText.text = expirates_in.ToString("0") + "s";
+            timerText.text = expirates_in.ToString("0") + " s";
 
             if (expirates_in < timerColorChangeLimit)
             {

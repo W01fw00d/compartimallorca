@@ -11,7 +11,8 @@ class Draggable :
     private float xOriginal;
     private float yOriginal;
 
-    private Color mouseOverColor = new Color(0, 1, 0.5f, 1);
+    //private Color mouseOverColor = new Color(0, 1, 0.5f, 1); //green
+    private Color mouseOverColor = new Color(0.4810431f, 0.530507f, 0.8867924f, 1); //violet
     private Color originalColor;
     public bool dragging = false;
     private float distance;
