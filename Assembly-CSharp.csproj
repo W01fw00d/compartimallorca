@@ -62,10 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CardFactory.cs" />
-    <Compile Include="Assets\Scripts\CitiesPainter.cs" />
     <Compile Include="Assets\Scripts\Draggable.cs" />
     <Compile Include="Assets\Scripts\Expirable.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Instantiables\CarRouteCard.cs" />
+    <Compile Include="Assets\Scripts\Instantiables\ComplexRoute.cs" />
+    <Compile Include="Assets\Scripts\Instantiables\SimpleRoute.cs" />
     <Compile Include="Assets\Scripts\LinesDrawer.cs" />
     <None Include="Assets\Scripts\Content\passengers_comments.xml" />
     <None Include="Assets\Scripts\Content\simple_routes.xml" />
@@ -73,11 +75,11 @@
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/unity_projects/compartimallorca/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/unity_projects/compartimallorca/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/unity_projects/compartimallorca/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PackageManagerUI.Editor">
+      <HintPath>C:/unity_projects/compartimallorca/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/unity_projects/compartimallorca/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
