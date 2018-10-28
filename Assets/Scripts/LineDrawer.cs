@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LinesDrawer : MonoBehaviour {
+public class LineDrawer : MonoBehaviour {
 
     // Simple
     public GameObject city_a;
@@ -20,8 +20,15 @@ public class LinesDrawer : MonoBehaviour {
     private Color complexRouteStartColor = new Color(1, 0.601f, 0, 1); //orange
     private Color complexRouteEndColor = new Color(1, 0, 0, 1); //red
 
+    private Color defaultCityColor = new Color(0.4337398f, 0.4465112f, 0.5377358f, 1); //Grey
+
     // Use this for initialization
     void Start()
+    {
+        
+    }
+
+    private void DebugDrawLine()
     {
         Vector3[] simpleRoute = new Vector3[] {
             city_a.transform.position,
@@ -43,7 +50,7 @@ public class LinesDrawer : MonoBehaviour {
         PaintCity(city_c.GetComponent<Image>(), complexRouteStartColor);
         PaintCity(city_d.GetComponent<Image>(), complexRouteStartColor);
         PaintCity(city_e.GetComponent<Image>(), complexRouteEndColor);
-        DrawLine(complexRouteLine, complexRoute, complexRouteStartColor, complexRouteEndColor); 
+        DrawLine(complexRouteLine, complexRoute, complexRouteStartColor, complexRouteEndColor);
     }
 
     private void PaintCity(Image city_image, Color color)
@@ -51,13 +58,45 @@ public class LinesDrawer : MonoBehaviour {
         city_image.color = color;
     }
 
+    public void DrawCarRoute(
+        string origin_name,
+        string middle_name,
+        string destination_name
+    ) {
+        GameObject origin = GameObject.Find(origin_name);
+        GameObject middle = GameObject.Find(middle_name);
+        GameObject destination = GameObject.Find(destination_name);
+
+        Vector3[] complexRoute = new Vector3[] {
+            origin.transform.position,
+            middle.transform.position,
+            destination.transform.position
+        };
+
+        PaintCity(origin.GetComponent<Image>(), complexRouteStartColor);
+        PaintCity(middle.GetComponent<Image>(), complexRouteStartColor);
+        PaintCity(destination.GetComponent<Image>(), complexRouteEndColor);
+        DrawLine(complexRouteLine, complexRoute, complexRouteStartColor, complexRouteEndColor);
+    }
+
+    public void ClearCarRoute(
+        string origin_name,
+        string middle_name,
+        string destination_name
+    ) {
+        GameObject origin = GameObject.Find(origin_name);
+        GameObject middle = GameObject.Find(middle_name);
+        GameObject destination = GameObject.Find(destination_name);
+
+        PaintCity(origin.GetComponent<Image>(), defaultCityColor);
+        PaintCity(middle.GetComponent<Image>(), defaultCityColor);
+        PaintCity(destination.GetComponent<Image>(), defaultCityColor);
+
+        ClearLine(complexRouteLine);
+    }
+
     private void DrawLine(LineRenderer line, Vector3[] route, Color startColor, Color endColor)
     {
-
-
-        //line.sortingOrder = 3;
-        //line.sortingLayerName = "Default";
-
         line.startWidth = .2f;
         line.endWidth = .02f;
 
@@ -67,6 +106,13 @@ public class LinesDrawer : MonoBehaviour {
 
         line.positionCount = route.Length;
         line.SetPositions(route);
+
+        line.enabled = true;
+    }
+
+    private void ClearLine(LineRenderer line)
+    {
+        line.enabled = false;
     }
 
 }

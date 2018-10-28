@@ -28,10 +28,21 @@ public class CardFactory : MonoBehaviour {
         TrackInactiveTaggedPassengerCards();
 
         //Debug
-        CreateCarCard();
-        CreatePassengerCard();
-        //CreatePassengerCard();
-        //CreatePassengerCard();
+        int count = 5;
+        while (count > 0)
+        {
+            CreateCarCard();
+            count--;
+        }
+        //
+        count = 1;
+        while (count > 0)
+        {
+            CreatePassengerCard();
+            
+            count--;
+        }
+        //
     }
 
     private void TrackInactiveTaggedCarCards()

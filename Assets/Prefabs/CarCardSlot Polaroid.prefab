@@ -430,8 +430,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eaaec2d7b62482498ccbf170ad85a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  n_seatSlots: 2
-  expirates_in: 15
+  n_seatSlots: 3
+  expirates_in: 60
+  lineDrawer: {fileID: 0}
 --- !u!114 &114610353353083826
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -214,6 +214,11 @@ Prefab:
       propertyPath: m_Name
       value: CarCardSlot5
       objectReference: {fileID: 0}
+    - target: {fileID: 114526924692064234, guid: 5705645d5b8abe447baa5fe43ddb04a7,
+        type: 2}
+      propertyPath: lineDrawer
+      value: 
+      objectReference: {fileID: 1037247395}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
   m_IsPrefabAsset: 0
@@ -318,6 +323,11 @@ Prefab:
       propertyPath: m_Name
       value: CarCardSlot3
       objectReference: {fileID: 0}
+    - target: {fileID: 114526924692064234, guid: 5705645d5b8abe447baa5fe43ddb04a7,
+        type: 2}
+      propertyPath: lineDrawer
+      value: 
+      objectReference: {fileID: 1037247395}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
   m_IsPrefabAsset: 0
@@ -815,6 +825,11 @@ Prefab:
       propertyPath: m_Name
       value: CarCardSlot4
       objectReference: {fileID: 0}
+    - target: {fileID: 114526924692064234, guid: 5705645d5b8abe447baa5fe43ddb04a7,
+        type: 2}
+      propertyPath: lineDrawer
+      value: 
+      objectReference: {fileID: 1037247395}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
   m_IsPrefabAsset: 0
@@ -953,6 +968,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114526924692064234, guid: 5705645d5b8abe447baa5fe43ddb04a7,
+        type: 2}
+      propertyPath: lineDrawer
+      value: 
+      objectReference: {fileID: 1037247395}
     - target: {fileID: 1356814654665328, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
       propertyPath: m_Name
       value: CarCardSlot1
@@ -1240,6 +1260,11 @@ Prefab:
       propertyPath: m_Name
       value: CarCardSlot2
       objectReference: {fileID: 0}
+    - target: {fileID: 114526924692064234, guid: 5705645d5b8abe447baa5fe43ddb04a7,
+        type: 2}
+      propertyPath: lineDrawer
+      value: 
+      objectReference: {fileID: 1037247395}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
   m_IsPrefabAsset: 0

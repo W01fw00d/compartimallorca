@@ -8,6 +8,9 @@ public class Expirable :
     MonoBehaviour,
     IPointerEnterHandler, IPointerExitHandler
 {
+    private float xOriginal;
+    private float yOriginal;
+
     public int n_seatSlots = 3;
     public float expirates_in = 60.0f;
 
@@ -15,20 +18,15 @@ public class Expirable :
     private float timerColorChangeLimit = 10.0f;
     private Color red = new Color(0.8f, 0, 0, 1);
 
-    private Color originalColor;
+    private Color originalColor = new Color(1, 1, 1, 1); //White
     //private Color mouseOverColor = new Color(1, 0.53f, 0, 1); //orange
     private Color mouseOverColor = new Color(1, 1, 0, 1); //yellow
 
-
-    //private int[,] complex_route = new int[,] {
-    //    { 1, 2 },
-    //    { 3, 4 },
-    //    { 5, 6 },
-    //    { 7, 8 }
-    //};
+    public LineDrawer lineDrawer;
 
     void Start() {
-        originalColor = GetComponent<Image>().color;
+        xOriginal = transform.position.x;
+        yOriginal = transform.position.y;
 
         Transform panel = gameObject.transform.Find("CharacterAvatar");
 
@@ -48,28 +46,48 @@ public class Expirable :
     public void OnPointerEnter(PointerEventData eventData)
     {
         GetComponent<Image>().color = mouseOverColor;
+
+        ComplexRoute complexRoute = gameObject.GetComponent<CarRouteCard>().complexRoute;
+
+        lineDrawer.DrawCarRoute(
+            complexRoute.OriginRoute.Origin,
+            complexRoute.OriginRoute.Destination,
+            complexRoute.DestinationRoute.Destination
+        );
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         GetComponent<Image>().color = originalColor;
+
+        ComplexRoute complexRoute = gameObject.GetComponent<CarRouteCard>().complexRoute;
+
+        lineDrawer.ClearCarRoute(
+            complexRoute.OriginRoute.Origin,
+            complexRoute.OriginRoute.Destination,
+            complexRoute.DestinationRoute.Destination
+        );
     }
 
     public void OnTriggerStay2D(Collider2D collider)
     {
-        if (!collider.gameObject.GetComponent<Draggable>().dragging)
+        if (collider.gameObject.GetComponent<Draggable>())
         {
-            Debug.Log(collider.gameObject.transform.FindObjectsWithTag("CharacterAvatar").Count);
+            if (!collider.gameObject.GetComponent<Draggable>().dragging)
+            {
+                var colliderCardAvatar =
+                    collider.gameObject.transform.FindObjectsWithTag("CharacterAvatar")[0].gameObject.GetComponent<Image>().sprite;
+                transform.FindObjectsWithTag("SeatSlot")[0].gameObject.GetComponent<Image>().sprite = colliderCardAvatar;
 
-            var colliderCardAvatar =
-                collider.gameObject.transform.FindObjectsWithTag("CharacterAvatar")[0].gameObject.GetComponent<Image>().sprite;
-            transform.FindObjectsWithTag("SeatSlot")[0].gameObject.GetComponent<Image>().sprite = colliderCardAvatar;
-
-            launch();
-        } else
-        {
-            GetComponent<Image>().color = mouseOverColor;
+                launch();
+            }
+            else
+            {
+                GetComponent<Image>().color = mouseOverColor;
+            }
         }
+
+        
     }
 
     public void OnTriggerExit2D(Collider2D collision)

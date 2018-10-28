@@ -19,6 +19,11 @@ class Draggable :
 
     void Start()
     {
+        ResetCard();
+    }
+
+    private void ResetCard()
+    {
         originalColor = GetComponent<Image>().color;
         xOriginal = transform.position.x;
         yOriginal = transform.position.y;
@@ -63,9 +68,7 @@ class Draggable :
 
     public void OnTriggerStay2D(Collider2D collider)
     {
-        //Debug.Log("OnTriggerStay2D");
-
-        if (!dragging)
+        if (!dragging && collider.gameObject.GetComponent<Expirable>())
         {
             gameObject.SetActive(false);
         }
