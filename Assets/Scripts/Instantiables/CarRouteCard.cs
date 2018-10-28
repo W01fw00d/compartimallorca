@@ -10,7 +10,7 @@ public class CarRouteCard : MonoBehaviour
     //private int occupied_n_slots = 0;
     //private int max_n_slots = 3;
 
-    private ComplexRoute complexRoute;
+    public ComplexRoute complexRoute;
 
 
     // Use this for initialization

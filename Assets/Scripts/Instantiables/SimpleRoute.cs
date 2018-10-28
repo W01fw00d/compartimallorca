@@ -2,7 +2,7 @@
 {
     private string origin;
     private string destination;
-    private bool reversed;
+    private bool reversed; // Not really needed, we will just create x2 different routes from every route in XML
 
     public SimpleRoute(string origin, string destination, bool reversed = false)
     {

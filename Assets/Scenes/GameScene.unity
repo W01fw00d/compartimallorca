@@ -214,25 +214,6 @@ Prefab:
       propertyPath: m_Name
       value: CarCardSlot5
       objectReference: {fileID: 0}
-    - target: {fileID: 224583009520689732, guid: 5705645d5b8abe447baa5fe43ddb04a7,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.999849
-      objectReference: {fileID: 0}
-    - target: {fileID: 224583009520689732, guid: 5705645d5b8abe447baa5fe43ddb04a7,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.999849
-      objectReference: {fileID: 0}
-    - target: {fileID: 224583009520689732, guid: 5705645d5b8abe447baa5fe43ddb04a7,
-        type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.999849
-      objectReference: {fileID: 0}
-    - target: {fileID: 1915634526180404, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
   m_IsPrefabAsset: 0
@@ -336,25 +317,6 @@ Prefab:
     - target: {fileID: 1356814654665328, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
       propertyPath: m_Name
       value: CarCardSlot3
-      objectReference: {fileID: 0}
-    - target: {fileID: 224583009520689732, guid: 5705645d5b8abe447baa5fe43ddb04a7,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.999849
-      objectReference: {fileID: 0}
-    - target: {fileID: 224583009520689732, guid: 5705645d5b8abe447baa5fe43ddb04a7,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.999849
-      objectReference: {fileID: 0}
-    - target: {fileID: 224583009520689732, guid: 5705645d5b8abe447baa5fe43ddb04a7,
-        type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.999849
-      objectReference: {fileID: 0}
-    - target: {fileID: 1915634526180404, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
@@ -853,25 +815,6 @@ Prefab:
       propertyPath: m_Name
       value: CarCardSlot4
       objectReference: {fileID: 0}
-    - target: {fileID: 224583009520689732, guid: 5705645d5b8abe447baa5fe43ddb04a7,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.999849
-      objectReference: {fileID: 0}
-    - target: {fileID: 224583009520689732, guid: 5705645d5b8abe447baa5fe43ddb04a7,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.999849
-      objectReference: {fileID: 0}
-    - target: {fileID: 224583009520689732, guid: 5705645d5b8abe447baa5fe43ddb04a7,
-        type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.999849
-      objectReference: {fileID: 0}
-    - target: {fileID: 1915634526180404, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
   m_IsPrefabAsset: 0
@@ -902,9 +845,9 @@ RectTransform:
   m_Children:
   - {fileID: 661205531}
   - {fileID: 1398566691}
-  - {fileID: 1839150052}
   - {fileID: 1139803780}
   - {fileID: 723017915}
+  - {fileID: 1839150052}
   m_Father: {fileID: 931348906}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1013,15 +956,6 @@ Prefab:
     - target: {fileID: 1356814654665328, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
       propertyPath: m_Name
       value: CarCardSlot1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1915634526180404, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114796201518018238, guid: 5705645d5b8abe447baa5fe43ddb04a7,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 0.601
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
@@ -1551,21 +1485,6 @@ Prefab:
       propertyPath: m_Name
       value: PassengerCardSlot2
       objectReference: {fileID: 0}
-    - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.0000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.0000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
-        type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.0000001
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f992ff39770f3a9409524a932972fdba, type: 2}
   m_IsPrefabAsset: 0
@@ -1596,6 +1515,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b78aef54b5d85489e091d97ecbb220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blankSprite: {fileID: 21300000, guid: c59c5c57a19a9c04eae679d2489a31ac, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: abef8fe13d422cb49a75a916bccdb9c8, type: 3}
+  - {fileID: 21300000, guid: 113bc5c4b84b1784ba34c9ebf6310839, type: 3}
 --- !u!224 &915385682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2085,6 +2008,7 @@ RectTransform:
   - {fileID: 1504451663}
   - {fileID: 357655716}
   - {fileID: 702778691}
+  - {fileID: 2106665720}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2191,7 +2115,7 @@ Prefab:
     - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
         type: 2}
@@ -2246,21 +2170,6 @@ Prefab:
     - target: {fileID: 1221335594458578, guid: f992ff39770f3a9409524a932972fdba, type: 2}
       propertyPath: m_Name
       value: PassengerCardSlot3
-      objectReference: {fileID: 0}
-    - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.0000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.0000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
-        type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.0000001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f992ff39770f3a9409524a932972fdba, type: 2}
@@ -2699,7 +2608,7 @@ Prefab:
     - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
         type: 2}
@@ -2754,21 +2663,6 @@ Prefab:
     - target: {fileID: 1221335594458578, guid: f992ff39770f3a9409524a932972fdba, type: 2}
       propertyPath: m_Name
       value: PassengerCardSlot4
-      objectReference: {fileID: 0}
-    - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.0000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.0000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
-        type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.0000001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f992ff39770f3a9409524a932972fdba, type: 2}
@@ -3023,15 +2917,6 @@ Prefab:
       propertyPath: m_Name
       value: PassengerCardSlot1
       objectReference: {fileID: 0}
-    - target: {fileID: 1549927430046094, guid: f992ff39770f3a9409524a932972fdba, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114193813836434826, guid: f992ff39770f3a9409524a932972fdba,
-        type: 2}
-      propertyPath: m_FontData.m_BestFit
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f992ff39770f3a9409524a932972fdba, type: 2}
   m_IsPrefabAsset: 0
@@ -3080,7 +2965,7 @@ Prefab:
     - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
         type: 2}
@@ -3136,21 +3021,6 @@ Prefab:
       propertyPath: m_Name
       value: PassengerCardSlot5
       objectReference: {fileID: 0}
-    - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.0000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.0000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 224940938330948764, guid: f992ff39770f3a9409524a932972fdba,
-        type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.0000001
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f992ff39770f3a9409524a932972fdba, type: 2}
   m_IsPrefabAsset: 0
@@ -3169,3 +3039,72 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 224583009520689732, guid: 5705645d5b8abe447baa5fe43ddb04a7,
     type: 2}
   m_PrefabInternal: {fileID: 8886658}
+--- !u!1 &2106665719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2106665720}
+  - component: {fileID: 2106665722}
+  - component: {fileID: 2106665721}
+  m_Layer: 8
+  m_Name: Magaluf
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2106665720
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2106665719}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.999849, y: 0.999849, z: 0.999849}
+  m_Children: []
+  m_Father: {fileID: 1037247400}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -192, y: -33}
+  m_SizeDelta: {x: 15, y: 15}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2106665721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2106665719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.43373975, g: 0.44651118, b: 0.5377358, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &2106665722
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2106665719}
+  m_CullTransparentMesh: 0

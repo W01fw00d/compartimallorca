@@ -1,57 +1,15 @@
 <SimpleRoutes>
-	<SimpleRoute n="0">
-		<From name="Palma"/>
-		<From name="Aeropuerto"/>
-	</SimpleRoute>
-
-	<SimpleRoute n="1">
-		<From name="Palma"/>
-		<From name="Inca"/>
-	</SimpleRoute>
-  
-  <SimpleRoute n="2">
-		<From name="Palma"/>
-		<From name="Magaluf"/>
-	</SimpleRoute>
-  
-  <SimpleRoute n="3">
-		<From name="Palma"/>
-		<From name="Banyalbufar"/>
-	</SimpleRoute>
-
-  <SimpleRoute n="4">
-		<From name="Banyalbufar"/>
-		<From name="Sóller"/>
-	</SimpleRoute>
-  
-  <SimpleRoute n="5">
-		<From name="Sóller"/>
-		<From name="Inca"/>
-	</SimpleRoute>
-    
-	<SimpleRoute n="6">
-		<From name="Inca"/>
-		<From name="Alcúdia"/>
-	</SimpleRoute>
-  
-	<SimpleRoute n="7">
-		<From name="Inca"/>
-		<From name="Manacor"/>
-	</SimpleRoute>
-	 
-	<SimpleRoute n="8">
-		<From name="Aeropuerto"/>
-		<From name="Campos"/>
-	</SimpleRoute>
-	
-	<SimpleRoute n="9">
-		<From name="Campos"/>
-		<From name="Manacor"/>
-	</SimpleRoute>
-	
-	<SimpleRoute n="10">
-		<From name="Manacor"/>
-		<From name="Artà"/>
-	</SimpleRoute>
-	
+	<Route index="0" from="Palma" to="Aeropuerto" />
+  <Route index="1" from="Palma" to="Inca" />
+  <Route index="2" from="Palma" to="Magaluf" />
+  <Route index="3" from="Palma" to="Banyalbufar" />
+  <Route index="4" from="Banyalbufar" to="Sóller" />
+  <Route index="5" from="Banyalbufar" to="Magaluf" />
+  <Route index="6" from="Sóller" to="Inca" />
+  <Route index="7" from="Inca" to="Alcúdia" />
+  <Route index="8" from="Inca" to="Manacor" />
+  <Route index="9" from="Aeropuerto" to="Campos" />
+  <Route index="10" from="Campos" to="Manacor" />
+  <Route index="11" from="Manacor" to="Artà" />
+  <Route index="12" from="Artà" to="Alcúdia" />
 </SimpleRoutes>

@@ -34,4 +34,14 @@
             destinationRoute = value;
         }
     }
+
+    public string GetOriginRouteOriginCity()
+    {
+        return originRoute.Origin;
+    }
+
+    public string GetDestinationRouteDestinationCity()
+    {
+        return destinationRoute.Destination;
+    }
 }

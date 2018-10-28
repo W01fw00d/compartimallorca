@@ -8,6 +8,7 @@ TagManager:
   - PeopleCard
   - CharacterAvatar
   - SeatSlot
+  - PassengerCard
   layers:
   - Default
   - TransparentFX
