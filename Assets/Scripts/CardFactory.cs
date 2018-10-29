@@ -35,7 +35,7 @@ public class CardFactory : MonoBehaviour {
             count--;
         }
         //
-        count = 1;
+        count = 5;
         while (count > 0)
         {
             CreatePassengerCard();
@@ -116,7 +116,29 @@ public class CardFactory : MonoBehaviour {
         GameObject characterAvatar = newCard.gameObject.transform.FindObjectsWithTag("CharacterAvatar")[0];
         characterAvatar.gameObject.GetComponent<Image>().sprite = GetUnusedRandomCharacterAvatar();
 
+        newCard.GetComponent<PassengerRouteCard>().simpleRoute = GetRandomSimpleRoute();
+
+        Transform routeTransform = newCard.gameObject.transform.Find("Route");
+
+        routeTransform.Find("FromText").GetComponent<Text>().text =
+            newCard.GetComponent<PassengerRouteCard>().simpleRoute.Origin;
+
+        routeTransform.Find("ToText").GetComponent<Text>().text =
+            newCard.GetComponent<PassengerRouteCard>().simpleRoute.Destination;
+
         newCard.gameObject.SetActive(true);
+    }
+
+    private SimpleRoute GetRandomSimpleRoute()
+    {
+        GameObject carCard = GetRandomActiveCarCard();
+        ComplexRoute complexRoute = carCard.GetComponent<CarRouteCard>().complexRoute;
+
+        bool shallGetOrigin = (int)Math.Round(UnityEngine.Random.value * 1) == 1;
+
+        return shallGetOrigin ?
+            complexRoute.OriginRoute :
+            complexRoute.DestinationRoute;
     }
 
     private ComplexRoute GetRandomComplexRoute()
@@ -250,6 +272,28 @@ public class CardFactory : MonoBehaviour {
         {
             return inactiveCards[0];
         } else
+        {
+            return null;
+        }
+    }
+
+    private GameObject GetRandomActiveCarCard()
+    {
+        List<GameObject> activeCards = new List<GameObject>();
+
+        foreach (GameObject card in carCards)
+        {
+            if (card.activeSelf)
+            {
+                activeCards.Add(card);
+            }
+        }
+
+        if (activeCards.Count > 0)
+        {
+            return activeCards[(int)Math.Round(UnityEngine.Random.value * (activeCards.Count - 1))];
+        }
+        else
         {
             return null;
         }

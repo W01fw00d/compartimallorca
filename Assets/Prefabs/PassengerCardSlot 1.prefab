@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 114437330219961394}
   - component: {fileID: 61760358406734256}
   - component: {fileID: 114280702971028994}
+  - component: {fileID: 114028808041444814}
   m_Layer: 5
   m_Name: Card
   m_TagString: PassengerCard
@@ -189,6 +190,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 300, y: 120}
   m_EdgeRadius: 0
+--- !u!114 &114028808041444814
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1549927430046094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ec9b404d99c1c6439f674eff6f83e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114193813836434826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -300,6 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragging: 0
+  lineDrawer: {fileID: 0}
 --- !u!114 &114345820207474292
 MonoBehaviour:
   m_ObjectHideFlags: 1

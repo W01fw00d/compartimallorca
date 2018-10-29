@@ -17,6 +17,8 @@ class Draggable :
     public bool dragging = false;
     private float distance;
 
+    public LineDrawer lineDrawer;
+
     void Start()
     {
         ResetCard();
@@ -42,11 +44,19 @@ class Draggable :
     public void OnPointerEnter(PointerEventData eventData)
     {
         GetComponent<Image>().color = mouseOverColor;
+
+        lineDrawer.DrawPassengerRoute(
+            gameObject.GetComponent<PassengerRouteCard>().simpleRoute
+        );
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         GetComponent<Image>().color = originalColor;
+
+        lineDrawer.ClearPassengerRoute(
+            gameObject.GetComponent<PassengerRouteCard>().simpleRoute
+        );
     }
 
     public void OnPointerDown(PointerEventData eventData)

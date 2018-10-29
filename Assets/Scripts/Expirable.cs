@@ -8,8 +8,8 @@ public class Expirable :
     MonoBehaviour,
     IPointerEnterHandler, IPointerExitHandler
 {
-    private float xOriginal;
-    private float yOriginal;
+    //private float xOriginal;
+    //private float yOriginal;
 
     public int n_seatSlots = 3;
     public float expirates_in = 60.0f;
@@ -25,8 +25,8 @@ public class Expirable :
     public LineDrawer lineDrawer;
 
     void Start() {
-        xOriginal = transform.position.x;
-        yOriginal = transform.position.y;
+        //xOriginal = transform.position.x;
+        //yOriginal = transform.position.y;
 
         Transform panel = gameObject.transform.Find("CharacterAvatar");
 

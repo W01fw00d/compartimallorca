@@ -95,6 +95,36 @@ public class LineDrawer : MonoBehaviour {
         ClearLine(complexRouteLine);
     }
 
+    public void DrawPassengerRoute(
+       SimpleRoute simpleRoute
+    )
+    {
+        GameObject origin = GameObject.Find(simpleRoute.Origin);
+        GameObject destination = GameObject.Find(simpleRoute.Destination);
+
+        Vector3[] simpleRouteVector = new Vector3[] {
+            origin.transform.position,
+            destination.transform.position
+        };
+
+        PaintCity(origin.GetComponent<Image>(), simpleRouteStartColor);
+        PaintCity(destination.GetComponent<Image>(), simpleRouteEndColor);
+        DrawLine(simpleRouteLine, simpleRouteVector, simpleRouteStartColor, simpleRouteEndColor);
+    }
+
+    public void ClearPassengerRoute(
+        SimpleRoute simpleRoute
+    )
+    {
+        GameObject origin = GameObject.Find(simpleRoute.Origin);
+        GameObject destination = GameObject.Find(simpleRoute.Destination);
+
+        PaintCity(origin.GetComponent<Image>(), defaultCityColor);
+        PaintCity(destination.GetComponent<Image>(), defaultCityColor);
+
+        ClearLine(simpleRouteLine);
+    }
+
     private void DrawLine(LineRenderer line, Vector3[] route, Color startColor, Color endColor)
     {
         line.startWidth = .2f;

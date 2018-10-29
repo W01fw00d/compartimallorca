@@ -1510,6 +1510,11 @@ Prefab:
       propertyPath: m_Name
       value: PassengerCardSlot2
       objectReference: {fileID: 0}
+    - target: {fileID: 114280702971028994, guid: f992ff39770f3a9409524a932972fdba,
+        type: 2}
+      propertyPath: lineDrawer
+      value: 
+      objectReference: {fileID: 1037247395}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f992ff39770f3a9409524a932972fdba, type: 2}
   m_IsPrefabAsset: 0
@@ -2196,6 +2201,11 @@ Prefab:
       propertyPath: m_Name
       value: PassengerCardSlot3
       objectReference: {fileID: 0}
+    - target: {fileID: 114280702971028994, guid: f992ff39770f3a9409524a932972fdba,
+        type: 2}
+      propertyPath: lineDrawer
+      value: 
+      objectReference: {fileID: 1037247395}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f992ff39770f3a9409524a932972fdba, type: 2}
   m_IsPrefabAsset: 0
@@ -2689,6 +2699,11 @@ Prefab:
       propertyPath: m_Name
       value: PassengerCardSlot4
       objectReference: {fileID: 0}
+    - target: {fileID: 114280702971028994, guid: f992ff39770f3a9409524a932972fdba,
+        type: 2}
+      propertyPath: lineDrawer
+      value: 
+      objectReference: {fileID: 1037247395}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f992ff39770f3a9409524a932972fdba, type: 2}
   m_IsPrefabAsset: 0
@@ -2938,6 +2953,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114280702971028994, guid: f992ff39770f3a9409524a932972fdba,
+        type: 2}
+      propertyPath: lineDrawer
+      value: 
+      objectReference: {fileID: 1037247395}
     - target: {fileID: 1221335594458578, guid: f992ff39770f3a9409524a932972fdba, type: 2}
       propertyPath: m_Name
       value: PassengerCardSlot1
@@ -3046,6 +3066,11 @@ Prefab:
       propertyPath: m_Name
       value: PassengerCardSlot5
       objectReference: {fileID: 0}
+    - target: {fileID: 114280702971028994, guid: f992ff39770f3a9409524a932972fdba,
+        type: 2}
+      propertyPath: lineDrawer
+      value: 
+      objectReference: {fileID: 1037247395}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f992ff39770f3a9409524a932972fdba, type: 2}
   m_IsPrefabAsset: 0
