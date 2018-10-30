@@ -24,6 +24,8 @@ public class Expirable :
 
     public LineDrawer lineDrawer;
 
+    private GameObject passengerCard;
+
     void Start() {
         //xOriginal = transform.position.x;
         //yOriginal = transform.position.y;
@@ -40,7 +42,20 @@ public class Expirable :
     }
 
     void Update () {
-        updateTimerText();
+        UpdateTimerText();
+    }
+
+    public bool Link(GameObject gameObject)
+    {
+        if (!passengerCard)
+        {
+            passengerCard = gameObject;
+            GetComponent<Image>().color = mouseOverColor; //Use special color for linking of two cards?
+
+            return true;
+        }
+
+        return false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -71,36 +86,27 @@ public class Expirable :
 
     public void OnTriggerStay2D(Collider2D collider)
     {
-        if (collider.gameObject.GetComponent<Draggable>())
-        {
-            if (!collider.gameObject.GetComponent<Draggable>().dragging)
-            {
-                var colliderCardAvatar =
-                    collider.gameObject.transform.FindObjectsWithTag("CharacterAvatar")[0].gameObject.GetComponent<Image>().sprite;
-                transform.FindObjectsWithTag("SeatSlot")[0].gameObject.GetComponent<Image>().sprite = colliderCardAvatar;
-
-                launch();
-            }
-            else
-            {
-                GetComponent<Image>().color = mouseOverColor;
-            }
+        if (
+            !passengerCard &&
+            collider.gameObject.GetComponent<Draggable>() &&
+            collider.gameObject.GetComponent<Draggable>().IsLinked(gameObject)
+        ) {
+            Link(collider.gameObject);
         }
-
-        
     }
 
     public void OnTriggerExit2D(Collider2D collision)
     {
         GetComponent<Image>().color = originalColor;
+
+        passengerCard = null;
     }
 
-    private void updateTimerText()
+    private void UpdateTimerText()
     {
         if (expirates_in <= 0.0f)
         {
-            gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
-            Invoke("resetObject", 10.0f);
+            Fall();
 
         } else
         {
@@ -114,25 +120,25 @@ public class Expirable :
         }
     }
 
-    private void resetObject()
+    private void ResetObject()
     {
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         gameObject.SetActive(false);
     }
 
-    public void launch()
+    public void Launch()
     {
-        animateMovement(-1);
+        AnimateMovement(-1);
     }
 
-    private void fall()
+    private void Fall()
     {
-        animateMovement(1);
+        AnimateMovement(1);
     }
 
-    private void animateMovement(int gravity)
+    private void AnimateMovement(int gravity)
     {
         gameObject.GetComponent<Rigidbody2D>().gravityScale = gravity;
-        Invoke("resetObject", 10.0f);
+        Invoke("ResetObject", 10.0f);
     }
 }

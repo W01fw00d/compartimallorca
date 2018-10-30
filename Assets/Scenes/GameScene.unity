@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 206029256}
   - component: {fileID: 206029255}
   - component: {fileID: 206029254}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Aeropuerto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 300255435}
   - component: {fileID: 300255437}
   - component: {fileID: 300255436}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Palma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -573,7 +573,7 @@ GameObject:
   - component: {fileID: 357655719}
   - component: {fileID: 357655718}
   - component: {fileID: 357655717}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: "S\xF3ller"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1023,7 +1023,7 @@ GameObject:
   - component: {fileID: 475731676}
   - component: {fileID: 475731678}
   - component: {fileID: 475731677}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: "Alc\xFAdia"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1345,7 +1345,7 @@ GameObject:
   - component: {fileID: 702778691}
   - component: {fileID: 702778693}
   - component: {fileID: 702778692}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: "Art\xE0"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1705,7 +1705,7 @@ GameObject:
   - component: {fileID: 964416056}
   - component: {fileID: 964416055}
   - component: {fileID: 964416054}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Inca
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1866,7 +1866,7 @@ GameObject:
   - component: {fileID: 987185719}
   - component: {fileID: 987185718}
   - component: {fileID: 987185717}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Manacor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1937,7 +1937,7 @@ GameObject:
   - component: {fileID: 1037247398}
   - component: {fileID: 1037247397}
   - component: {fileID: 1037247395}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: CitiesCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2017,7 +2017,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1037247400
 RectTransform:
@@ -2220,7 +2220,7 @@ GameObject:
   - component: {fileID: 1504451666}
   - component: {fileID: 1504451665}
   - component: {fileID: 1504451664}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Banyalbufar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2449,7 +2449,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &1640062776
 RectTransform:
@@ -2792,7 +2792,7 @@ GameObject:
   - component: {fileID: 1806564940}
   - component: {fileID: 1806564939}
   - component: {fileID: 1806564938}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Campos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3099,7 +3099,7 @@ GameObject:
   - component: {fileID: 2106665720}
   - component: {fileID: 2106665722}
   - component: {fileID: 2106665721}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Magaluf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
