@@ -84,17 +84,31 @@ public class CardFactory : MonoBehaviour {
         GameObject characterAvatar = newCard.gameObject.transform.FindObjectsWithTag("CharacterAvatar")[0];
         characterAvatar.gameObject.GetComponent<Image>().sprite = GetUnusedRandomCharacterAvatar();
 
-        newCard.GetComponent<CarRouteCard>().complexRoute = GetRandomComplexRoute();
+        SetCarCardSeatSlotsRandom(characterAvatar);
+
+        newCard.GetComponent<Expirable>().complexRoute = GetRandomComplexRoute();
 
         Transform routeTransform = newCard.gameObject.transform.Find("Route");
 
         routeTransform.Find("FromText").GetComponent<Text>().text =
-            newCard.GetComponent<CarRouteCard>().complexRoute.GetOriginRouteOriginCity();
+            newCard.GetComponent<Expirable>().complexRoute.GetOriginRouteOriginCity();
 
         routeTransform.Find("ToText").GetComponent<Text>().text =
-            newCard.GetComponent<CarRouteCard>().complexRoute.GetDestinationRouteDestinationCity();
+            newCard.GetComponent<Expirable>().complexRoute.GetDestinationRouteDestinationCity();
 
         newCard.gameObject.SetActive(true);
+    }
+
+    private void SetCarCardSeatSlotsRandom(GameObject characterAvatar)
+    {
+        List<GameObject> seatSlotGameObjects = characterAvatar.gameObject.transform.FindObjectsWithTag("SeatSlot");
+        int n_seatSlots = (int)Math.Round(UnityEngine.Random.value * 2);
+
+        while (n_seatSlots > 0)
+        {
+            seatSlotGameObjects[n_seatSlots].SetActive(false);
+            n_seatSlots--;
+        }
     }
 
     private void CreatePassengerCard()
@@ -116,15 +130,15 @@ public class CardFactory : MonoBehaviour {
         GameObject characterAvatar = newCard.gameObject.transform.FindObjectsWithTag("CharacterAvatar")[0];
         characterAvatar.gameObject.GetComponent<Image>().sprite = GetUnusedRandomCharacterAvatar();
 
-        newCard.GetComponent<PassengerRouteCard>().simpleRoute = GetRandomSimpleRoute();
+        newCard.GetComponent<Draggable>().simpleRoute = GetRandomSimpleRoute();
 
         Transform routeTransform = newCard.gameObject.transform.Find("Route");
 
         routeTransform.Find("FromText").GetComponent<Text>().text =
-            newCard.GetComponent<PassengerRouteCard>().simpleRoute.Origin;
+            newCard.GetComponent<Draggable>().simpleRoute.Origin;
 
         routeTransform.Find("ToText").GetComponent<Text>().text =
-            newCard.GetComponent<PassengerRouteCard>().simpleRoute.Destination;
+            newCard.GetComponent<Draggable>().simpleRoute.Destination;
 
         newCard.gameObject.SetActive(true);
     }
@@ -132,7 +146,7 @@ public class CardFactory : MonoBehaviour {
     private SimpleRoute GetRandomSimpleRoute()
     {
         GameObject carCard = GetRandomActiveCarCard();
-        ComplexRoute complexRoute = carCard.GetComponent<CarRouteCard>().complexRoute;
+        ComplexRoute complexRoute = carCard.GetComponent<Expirable>().complexRoute;
 
         bool shallGetOrigin = (int)Math.Round(UnityEngine.Random.value * 1) == 1;
 

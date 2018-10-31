@@ -8,33 +8,25 @@ class Draggable :
     MonoBehaviour,
     IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
-    private float xOriginal;
-    private float yOriginal;
-    private float zOriginal;
-
-    //private Color mouseOverColor = new Color(0, 1, 0.5f, 1); //green
-    private Color mouseOverColor = new Color(0.4810431f, 0.530507f, 0.8867924f, 1); //violet
-    private Color originalColor;
-    public bool dragging = false;
-    private float distance;
-
     public LineDrawer lineDrawer;
 
+    public SimpleRoute simpleRoute;
+    public bool dragging = false;
+
+    private Color mouseOverColor = new Color(0.4810431f, 0.530507f, 0.8867924f, 1); //violet
+    private Color originalColor;
+
+    private float xOriginal;
+    private float yOriginal;
+    //private float zOriginal;
+    private float distance;
     private GameObject carCard;
+
+    //private int points;
 
     void Start()
     {
         ResetCard();
-    }
-
-    private void ResetCard()
-    {
-        originalColor = GetComponent<Image>().color;
-        xOriginal = transform.position.x;
-        yOriginal = transform.position.y;
-        zOriginal = transform.position.z;
-
-        Debug.Log("ResetCard");
     }
 
     public void Update()
@@ -60,7 +52,7 @@ class Draggable :
             GetComponent<Image>().color = mouseOverColor;
 
             lineDrawer.DrawPassengerRoute(
-                gameObject.GetComponent<PassengerRouteCard>().simpleRoute
+                simpleRoute
             );
         }
     }
@@ -72,7 +64,7 @@ class Draggable :
             GetComponent<Image>().color = originalColor;
 
             lineDrawer.ClearPassengerRoute(
-                gameObject.GetComponent<PassengerRouteCard>().simpleRoute
+                simpleRoute
             );
         }  
     }
@@ -83,16 +75,10 @@ class Draggable :
         //{
             distance = Vector3.Distance(transform.position, Camera.main.transform.position);
             dragging = true;
-            MoveToFront();
+            //MoveToFront();
 
             //GameObject.Find("GameManager").GetComponent<GameManager>().DraggedCard = gameObject;
         //}
-    }
-
-    private void MoveToFront()
-    {
-        var oldPosition = transform.position;
-        transform.position = new Vector3(oldPosition.x, oldPosition.y, 10.0f);
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -100,21 +86,18 @@ class Draggable :
         dragging = false;
         //GameObject.Find("GameManager").GetComponent<GameManager>().DraggedCard = null;
 
-        if (carCard && carCard.GetComponent<CarRouteCard>().TryEnterCar(gameObject))
+        if (carCard && carCard.GetComponent<Expirable>().TryEnterCar(gameObject))
         {
             gameObject.SetActive(false);
+            lineDrawer.ClearPassengerRoute(
+                simpleRoute
+            );
         }
 
         //Invoke("ResetPosition", 2.0f);
         ResetPosition();
     }
 
-    private void ResetPosition()
-    {
-        var oldPosition = transform.position;
-        transform.position = new Vector3(xOriginal, yOriginal, 0.0f);
-        //transform.SetPositionAndRotation(new Vector3(xOriginal, yOriginal, 0), new Quaternion());
-    }
 
     public void OnTriggerStay2D(Collider2D collider)
     {
@@ -136,26 +119,25 @@ class Draggable :
     {
         return carCard == gameObject;
     }
-}
 
-public static class TransformExtensions
-{
-    public static List<GameObject> FindObjectsWithTag(this Transform parent, string tag)
+    private void ResetCard()
     {
-        List<GameObject> taggedGameObjects = new List<GameObject>();
-
-        for (int i = 0; i < parent.childCount; i++)
-        {
-            Transform child = parent.GetChild(i);
-            if (child.tag == tag)
-            {
-                taggedGameObjects.Add(child.gameObject);
-            }
-            if (child.childCount > 0)
-            {
-                taggedGameObjects.AddRange(FindObjectsWithTag(child, tag));
-            }
-        }
-        return taggedGameObjects;
+        originalColor = GetComponent<Image>().color;
+        xOriginal = transform.position.x;
+        yOriginal = transform.position.y;
+        //zOriginal = transform.position.z;
     }
+
+    private void ResetPosition()
+    {
+        var oldPosition = transform.position;
+        transform.position = new Vector3(xOriginal, yOriginal, 0.0f);
+        //transform.SetPositionAndRotation(new Vector3(xOriginal, yOriginal, 0), new Quaternion());
+    }
+
+    //private void MoveToFront()
+    //{
+    //    var oldPosition = transform.position;
+    //    transform.position = new Vector3(oldPosition.x, oldPosition.y, 10.0f);
+    //}
 }

@@ -10,6 +10,7 @@ TagManager:
   - SeatSlot
   - PassengerCard
   - CharacterText
+  - OccupiedSeat
   layers:
   - Default
   - TransparentFX

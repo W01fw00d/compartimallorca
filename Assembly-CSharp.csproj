@@ -62,14 +62,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CardFactory.cs" />
-    <Compile Include="Assets\Scripts\CarRouteCard.cs" />
     <Compile Include="Assets\Scripts\Draggable.cs" />
     <Compile Include="Assets\Scripts\Expirable.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Instantiables\ComplexRoute.cs" />
     <Compile Include="Assets\Scripts\Instantiables\SimpleRoute.cs" />
     <Compile Include="Assets\Scripts\LineDrawer.cs" />
-    <Compile Include="Assets\Scripts\PassengerRouteCard.cs" />
+    <Compile Include="Assets\Scripts\TransformExtensions.cs" />
     <None Include="Assets\Scripts\Content\passengers_comments.xml" />
     <None Include="Assets\Scripts\Content\simple_routes.xml" />
     <None Include="Assets\Scripts\Content\drivers_comments.xml" />
