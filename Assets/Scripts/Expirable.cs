@@ -181,6 +181,12 @@ public class Expirable :
         expirationLimit = newExpiresIn;
         expires_in = newExpiresIn;
 
+        if (!timerText)
+        {
+            Transform panel = gameObject.transform.Find("CharacterAvatar");
+            timerText = panel.Find("TimerText").gameObject.GetComponent<Text>();
+        }
+
         timerText.color = black;
     }
 
