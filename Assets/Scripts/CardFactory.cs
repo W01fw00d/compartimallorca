@@ -85,9 +85,37 @@ public class CardFactory : MonoBehaviour {
         characterAvatar.gameObject.GetComponent<Image>().sprite = GetUnusedRandomCharacterAvatar();
 
         SetCarCardSeatSlotsRandom(characterAvatar);
+        SetCarCarRandomComplexRoute(newCard);
+        SetCarCardRandomTimer(newCard);
+        //calculatedPoints
 
+        newCard.gameObject.SetActive(true);
+        newCard.gameObject.GetComponent<Expirable>().cardActive = true;
+    }
+
+    private void SetCarCardRandomTimer(GameObject newCard)
+    {
+        float randomExpirationLimit = (int)Math.Round(UnityEngine.Random.value * 40.0f) + 20.0f;
+
+        newCard.GetComponent<Expirable>().SetExpiresIn(randomExpirationLimit);
+    }
+
+    private void SetCarCardSeatSlotsRandom(GameObject characterAvatar)
+    {
+        List<GameObject> seatSlotGameObjects = characterAvatar.gameObject.transform.FindObjectsWithTag("EmptySeat");
+        int n_seatSlots = (int)Math.Round(UnityEngine.Random.value * 2);
+
+        while (n_seatSlots > 0)
+        {
+            seatSlotGameObjects[n_seatSlots].SetActive(false);
+            seatSlotGameObjects[n_seatSlots].tag = "BlockedSeat";
+            n_seatSlots--;
+        }
+    }
+
+    private void SetCarCarRandomComplexRoute(GameObject newCard)
+    {
         newCard.GetComponent<Expirable>().complexRoute = GetRandomComplexRoute();
-
         Transform routeTransform = newCard.gameObject.transform.Find("Route");
 
         routeTransform.Find("FromText").GetComponent<Text>().text =
@@ -95,20 +123,6 @@ public class CardFactory : MonoBehaviour {
 
         routeTransform.Find("ToText").GetComponent<Text>().text =
             newCard.GetComponent<Expirable>().complexRoute.GetDestinationRouteDestinationCity();
-
-        newCard.gameObject.SetActive(true);
-    }
-
-    private void SetCarCardSeatSlotsRandom(GameObject characterAvatar)
-    {
-        List<GameObject> seatSlotGameObjects = characterAvatar.gameObject.transform.FindObjectsWithTag("SeatSlot");
-        int n_seatSlots = (int)Math.Round(UnityEngine.Random.value * 2);
-
-        while (n_seatSlots > 0)
-        {
-            seatSlotGameObjects[n_seatSlots].SetActive(false);
-            n_seatSlots--;
-        }
     }
 
     private void CreatePassengerCard()

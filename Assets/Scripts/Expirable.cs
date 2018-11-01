@@ -16,8 +16,13 @@ public class Expirable :
 
     public ComplexRoute complexRoute;
     public int n_seatSlots = 3;
-    public float expirates_in = 60.0f;
 
+    public bool cardActive = false;
+
+    private float expirationLimit;
+    public float expires_in;
+
+    private Color black = new Color(0, 0, 0, 1);
     private Color red = new Color(0.8f, 0, 0, 1);
     private Color originalColor = new Color(1, 1, 1, 1); //White
     private Color mouseOverColor = new Color(1, 1, 0, 1); //yellow
@@ -29,7 +34,7 @@ public class Expirable :
     private GameObject passengerCard;
     private bool isPassengerCardRouteMatching = false;
 
-    //private int points;
+    public int basePoints;
     //private int expiration_time;
     //private int n_slots;
     //private int occupied_n_slots = 0;
@@ -40,18 +45,20 @@ public class Expirable :
         //yOriginal = transform.position.y;
 
         Transform panel = gameObject.transform.Find("CharacterAvatar");
-
-        Transform slots_wrapper = panel.Find("SeatsSlotsWrapper");
         timerText = panel.Find("TimerText").gameObject.GetComponent<Text>();
 
-        for (int i = 1; i <= n_seatSlots; i++)
-        {
-            slots_wrapper.transform.Find("SeatSlot" + i).gameObject.SetActive(true);
-        }
+        //Transform slots_wrapper = panel.Find("SeatsSlotsWrapper");
+        //for (int i = 1; i <= n_seatSlots; i++)
+        //{
+        //    slots_wrapper.transform.Find("SeatSlot" + i).gameObject.SetActive(true);
+        //}
     }
 
     void Update () {
-        UpdateTimerText();
+        if (gameObject.activeSelf)
+        {
+            UpdateTimerText();
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -114,12 +121,15 @@ public class Expirable :
             var colliderCardAvatar =
                 passengerCard.transform.FindObjectsWithTag("CharacterAvatar")[0].gameObject.GetComponent<Image>().sprite;
 
-            GameObject seatSlot = transform.FindObjectsWithTag("SeatSlot")[0].gameObject;
+            GameObject emptySeat = transform.FindObjectsWithTag("EmptySeat")[0].gameObject;
 
-            seatSlot.gameObject.GetComponent<Image>().sprite = colliderCardAvatar;
-            seatSlot.tag = "OccupiedSeat";
+            emptySeat.gameObject.GetComponent<Image>().sprite = colliderCardAvatar;
+            emptySeat.tag = "OccupiedSeat";
 
-            gameObject.GetComponent<Expirable>().Launch();
+            if (!ExistEmptySeats())
+            {
+                LaunchCar(true);
+            }
 
             return true;
         }
@@ -127,6 +137,51 @@ public class Expirable :
         {
             return false;
         }
+    }
+
+    private void LaunchCar(bool isCompleted)
+    {
+        int points = GetPoints(isCompleted);
+
+        Debug.Log("Total Points");
+        Debug.Log(points);
+        Debug.Log("------------");
+
+        GameObject.Find("GameManager").GetComponent<GameManager>().AddPoints(
+            points
+        );
+
+        Launch();
+    }
+
+    private int GetPoints(bool isCarCompleted)
+    {
+        int basePoints = 200;
+        int bonusForCompletion = isCarCompleted ? 2 : 1;
+
+        Debug.Log("Seats Points");
+        Debug.Log(basePoints * transform.FindObjectsWithTag("OccupiedSeat").Count);
+        Debug.Log("With Completion bonus");
+        Debug.Log(basePoints * bonusForCompletion * transform.FindObjectsWithTag("OccupiedSeat").Count);
+        Debug.Log("Expiration Time Limit");
+        Debug.Log(-(int)expirationLimit);
+        Debug.Log("Expiration Time left");
+        Debug.Log(-(int)expires_in);
+
+        return
+            (basePoints * bonusForCompletion * transform.FindObjectsWithTag("OccupiedSeat").Count)
+            - (int)expirationLimit
+            - (int)expires_in
+        ;
+
+    }
+
+    public void SetExpiresIn(float newExpiresIn)
+    {
+        expirationLimit = newExpiresIn;
+        expires_in = newExpiresIn;
+
+        timerText.color = black;
     }
 
     private void DrawRoute()
@@ -149,16 +204,24 @@ public class Expirable :
 
     private void UpdateTimerText()
     {
-        if (expirates_in <= 0.0f)
+        if (cardActive && expires_in <= 0.0f)
         {
-            Fall();
+            cardActive = false;
+
+            if (IsAnySeatOccupied())
+            {
+                LaunchCar(false);
+            } else
+            {
+                Fall();
+            }
 
         } else
         {
-            expirates_in -= Time.deltaTime;
-            timerText.text = expirates_in.ToString("0") + " s";
+            expires_in -= Time.deltaTime;
+            timerText.text = expires_in.ToString("0") + " s";
 
-            if (expirates_in < timerColorChangeLimit)
+            if (expires_in < timerColorChangeLimit)
             {
                 timerText.color = red;
             }
@@ -168,12 +231,13 @@ public class Expirable :
     private void ResetObject()
     {
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+        cardActive = false;
         gameObject.SetActive(false);
 
         List<GameObject> occupiedSeats = gameObject.transform.FindObjectsWithTag("OccupiedSeat");
         foreach (GameObject occupiedSeat in occupiedSeats)
         {
-            occupiedSeat.tag = "SeatSlot";
+            occupiedSeat.tag = "EmptySeat";
             occupiedSeat.GetComponent<Image>().sprite = blankSprite;
         }
 
@@ -197,17 +261,22 @@ public class Expirable :
     private void AnimateMovement(int gravity)
     {
         gameObject.GetComponent<Rigidbody2D>().gravityScale = gravity;
-        Invoke("ResetObject", 10.0f);
+        Invoke("ResetObject", 5.0f);
     }
 
     private bool CanEnterCar(SimpleRoute simpleRoute)
     {
-        return AreSeatsAvailable() && isPassengerCardRouteMatching;
+        return ExistEmptySeats() && isPassengerCardRouteMatching;
     }
 
-    private bool AreSeatsAvailable()
+    private bool ExistEmptySeats()
     {
-        return transform.FindObjectsWithTag("SeatSlot").Count > 0;
+        return transform.FindObjectsWithTag("EmptySeat").Count > 0;
+    }
+
+    private bool IsAnySeatOccupied()
+    {
+        return transform.FindObjectsWithTag("OccupiedSeat").Count > 0;
     }
 
     private bool ContainsSimpleRoute(SimpleRoute simpleRoute)
