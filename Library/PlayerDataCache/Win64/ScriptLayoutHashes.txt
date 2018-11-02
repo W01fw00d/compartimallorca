@@ -2,6 +2,7 @@ WindowsStandalone
 PlayerPath?
 C:/unity_projects/compartimallorca/Build/compartimallorca.exe
 SceneListBegin?
+Assets/Scenes/MainMenu.unity
 Assets/Scenes/GameScene.unity
 SceneListEnd?
 c422dd62785a6d0afa870fbd111886ce Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret

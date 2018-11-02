@@ -21,28 +21,56 @@ public class CardFactory : MonoBehaviour {
     private GameObject[] carCards;
     private GameObject[] passengerCards;
 
+    private GameManager gameManager;
+
     void Start () {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         freeSprites = sprites;
 
         TrackInactiveTaggedCarCards();
         TrackInactiveTaggedPassengerCards();
 
         //Debug
-        int count = 5;
-        while (count > 0)
+        //int count = 5;
+        //while (count > 0)
+        //{
+        //    CreateCarCard();
+        //    count--;
+        //}
+        //
+        //int count = 5;
+        //while (count > 0)
+        //{
+        //    CreatePassengerCard();
+
+        //    count--;
+        //}
+        //
+
+        float period = 0.5F;
+        float passengerCreationSlowFactor = 1.5F;
+
+        StartCoroutine(CreateCarCardRoutine(period));
+        StartCoroutine(CreatePassengerCardRoutine(period * passengerCreationSlowFactor));
+    }
+
+    IEnumerator CreateCarCardRoutine(float waitTime)
+    {
+        while (gameManager.isGameOn)
         {
+            yield return new WaitForSeconds(waitTime);
             CreateCarCard();
-            count--;
         }
-        //
-        count = 5;
-        while (count > 0)
+    }
+
+    IEnumerator CreatePassengerCardRoutine(float waitTime)
+    {
+        while (gameManager.isGameOn)
         {
+            yield return new WaitForSeconds(waitTime);
             CreatePassengerCard();
-            
-            count--;
         }
-        //
     }
 
     private void TrackInactiveTaggedCarCards()
@@ -75,7 +103,7 @@ public class CardFactory : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Cannot find any inactive card; cannot create a new passenger card");
+            Debug.Log("Cannot find any inactive car card; cannot create a new car card");
         }
     }
 
@@ -87,7 +115,6 @@ public class CardFactory : MonoBehaviour {
         SetCarCardSeatSlotsRandom(characterAvatar);
         SetCarCarRandomComplexRoute(newCard);
         SetCarCardRandomTimer(newCard);
-        //calculatedPoints
 
         newCard.gameObject.SetActive(true);
         newCard.gameObject.GetComponent<Expirable>().cardActive = true;
@@ -135,7 +162,8 @@ public class CardFactory : MonoBehaviour {
 
         } else
         {
-            Debug.Log("Cannot find any inactive card; cannot create a new passenger card");
+            //No deberia pasar nunca
+            Debug.Log("Cannot find any inactive passenger card; cannot create a new passenger card");
         }
     }
 
@@ -144,29 +172,51 @@ public class CardFactory : MonoBehaviour {
         GameObject characterAvatar = newCard.gameObject.transform.FindObjectsWithTag("CharacterAvatar")[0];
         characterAvatar.gameObject.GetComponent<Image>().sprite = GetUnusedRandomCharacterAvatar();
 
-        newCard.GetComponent<Draggable>().simpleRoute = GetRandomSimpleRoute();
+        SimpleRoute randomSimpleRoute = GetRandomSimpleRoute();
 
-        Transform routeTransform = newCard.gameObject.transform.Find("Route");
+        if (randomSimpleRoute != null)
+        {
+            newCard.GetComponent<Draggable>().simpleRoute = randomSimpleRoute;
 
-        routeTransform.Find("FromText").GetComponent<Text>().text =
-            newCard.GetComponent<Draggable>().simpleRoute.Origin;
+            Transform routeTransform = newCard.gameObject.transform.Find("Route");
 
-        routeTransform.Find("ToText").GetComponent<Text>().text =
-            newCard.GetComponent<Draggable>().simpleRoute.Destination;
+            routeTransform.Find("FromText").GetComponent<Text>().text =
+                newCard.GetComponent<Draggable>().simpleRoute.Origin;
 
-        newCard.gameObject.SetActive(true);
+            routeTransform.Find("ToText").GetComponent<Text>().text =
+                newCard.GetComponent<Draggable>().simpleRoute.Destination;
+
+            newCard.gameObject.SetActive(true);
+
+            GameObject nextCard = GetFirstInactivePassengerCard();
+
+            if (nextCard == null)
+            {
+                GameObject.Find("GameManager").GetComponent<GameManager>().LaunchGameOverSequence();
+            }
+
+        } else
+        {
+            //Debug.Log("Cannot find any car card; cannot create a new passenger card");
+        }
     }
 
     private SimpleRoute GetRandomSimpleRoute()
     {
         GameObject carCard = GetRandomActiveCarCard();
-        ComplexRoute complexRoute = carCard.GetComponent<Expirable>().complexRoute;
+        if (carCard)
+        {
+            ComplexRoute complexRoute = carCard.GetComponent<Expirable>().complexRoute;
 
-        bool shallGetOrigin = (int)Math.Round(UnityEngine.Random.value * 1) == 1;
+            bool shallGetOrigin = (int)Math.Round(UnityEngine.Random.value * 1) == 1;
 
-        return shallGetOrigin ?
-            complexRoute.OriginRoute :
-            complexRoute.DestinationRoute;
+            return shallGetOrigin ?
+                complexRoute.OriginRoute :
+                complexRoute.DestinationRoute;
+        } else
+        {
+            return null;
+        }
     }
 
     private ComplexRoute GetRandomComplexRoute()
@@ -290,11 +340,14 @@ public class CardFactory : MonoBehaviour {
 
         foreach (GameObject card in carCards)
         {
-            if (!card.activeSelf)
+            if (!card.GetComponent<Expirable>().cardActive)
             {
                 inactiveCards.Add(card);
             }
         }
+
+        Debug.Log(carCards.Length);
+        Debug.Log(inactiveCards.Count);
 
         if (inactiveCards.Count > 0)
         {

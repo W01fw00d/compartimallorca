@@ -8,8 +8,8 @@ public class Expirable :
     MonoBehaviour,
     IPointerEnterHandler, IPointerExitHandler
 {
-    //private float xOriginal;
-    //private float yOriginal;
+    private float xOriginal;
+    private float yOriginal;
 
     public Sprite blankSprite;
     public LineDrawer lineDrawer;
@@ -41,8 +41,8 @@ public class Expirable :
     //private int max_n_slots = 3;
 
     void Start() {
-        //xOriginal = transform.position.x;
-        //yOriginal = transform.position.y;
+        xOriginal = transform.position.x;
+        yOriginal = transform.position.y;
 
         Transform panel = gameObject.transform.Find("CharacterAvatar");
         timerText = panel.Find("TimerText").gameObject.GetComponent<Text>();
@@ -143,9 +143,9 @@ public class Expirable :
     {
         int points = GetPoints(isCompleted);
 
-        Debug.Log("Total Points");
-        Debug.Log(points);
-        Debug.Log("------------");
+        //Debug.Log("Total Points");
+        //Debug.Log(points);
+        //Debug.Log("------------");
 
         GameObject.Find("GameManager").GetComponent<GameManager>().AddPoints(
             points
@@ -159,21 +159,20 @@ public class Expirable :
         int basePoints = 200;
         int bonusForCompletion = isCarCompleted ? 2 : 1;
 
-        Debug.Log("Seats Points");
-        Debug.Log(basePoints * transform.FindObjectsWithTag("OccupiedSeat").Count);
-        Debug.Log("With Completion bonus");
-        Debug.Log(basePoints * bonusForCompletion * transform.FindObjectsWithTag("OccupiedSeat").Count);
-        Debug.Log("Expiration Time Limit");
-        Debug.Log(-(int)expirationLimit);
-        Debug.Log("Expiration Time left");
-        Debug.Log(-(int)expires_in);
+        //Debug.Log("Seats Points");
+        //Debug.Log(basePoints * transform.FindObjectsWithTag("OccupiedSeat").Count);
+        //Debug.Log("With Completion bonus");
+        //Debug.Log(basePoints * bonusForCompletion * transform.FindObjectsWithTag("OccupiedSeat").Count);
+        //Debug.Log("Expiration Time Limit");
+        //Debug.Log(-(int)expirationLimit);
+        //Debug.Log("Expiration Time left");
+        //Debug.Log(-(int)expires_in);
 
         return
             (basePoints * bonusForCompletion * transform.FindObjectsWithTag("OccupiedSeat").Count)
             - (int)expirationLimit
             - (int)expires_in
         ;
-
     }
 
     public void SetExpiresIn(float newExpiresIn)
@@ -252,6 +251,14 @@ public class Expirable :
         {
             seatSlot.SetActive(true);
         }
+
+        ResetPosition();
+    }
+
+    private void ResetPosition()
+    {
+        var oldPosition = transform.position;
+        transform.position = new Vector3(xOriginal, yOriginal, 0.0f);
     }
 
     private void Launch()
@@ -259,7 +266,7 @@ public class Expirable :
         AnimateMovement(-1);
     }
 
-    private void Fall()
+    public void Fall()
     {
         AnimateMovement(1);
     }

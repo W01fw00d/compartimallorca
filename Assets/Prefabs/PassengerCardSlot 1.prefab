@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 61760358406734256}
   - component: {fileID: 114280702971028994}
   - component: {fileID: 114832897818833608}
+  - component: {fileID: 50072714311035466}
   m_Layer: 5
   m_Name: Card
   m_TagString: PassengerCard
@@ -165,6 +166,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!50 &50072714311035466
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1549927430046094}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!61 &61760358406734256
 BoxCollider2D:
   m_ObjectHideFlags: 1

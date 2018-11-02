@@ -120,6 +120,11 @@ class Draggable :
         return carCard == gameObject;
     }
 
+    public void Fall()
+    {
+        AnimateMovement(1);
+    }
+
     private void ResetCard()
     {
         originalColor = GetComponent<Image>().color;
@@ -133,6 +138,19 @@ class Draggable :
         var oldPosition = transform.position;
         transform.position = new Vector3(xOriginal, yOriginal, 0.0f);
         //transform.SetPositionAndRotation(new Vector3(xOriginal, yOriginal, 0), new Quaternion());
+    }
+
+    private void AnimateMovement(int gravity)
+    {
+        gameObject.GetComponent<Rigidbody2D>().gravityScale = gravity;
+        Invoke("ResetObject", 5.0f);
+    }
+
+    private void ResetObject()
+    {
+        gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+        gameObject.SetActive(false);
+        ResetPosition();
     }
 
     //private void MoveToFront()
