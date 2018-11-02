@@ -168,3 +168,4 @@ ff489e58d336734ef3ca47c7eed5fd15 Assembly-CSharp.dll:.GameManager
 50c2ce879971ffe46a9430a3fbdc3dbd Assembly-CSharp.dll:.LineDrawer
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 75e1d5b4c5046e031111668bba8c20ae Assembly-CSharp.dll:.CardFactory
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.MenuManager

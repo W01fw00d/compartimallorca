@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour {
     public void AddPoints(int points)
     {
         totalPoints += points;
-        pointsText.GetComponent<Text>().text = "Points: " + totalPoints.ToString("D5");
+        pointsText.GetComponent<Text>().text = "Punts: " + totalPoints.ToString("D5");
 
         pointsAddedText.GetComponent<Text>().text = "+" + points;
         pointsAddedText.SetActive(true);

@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 114437330219961394}
   - component: {fileID: 61760358406734256}
   - component: {fileID: 114280702971028994}
+  - component: {fileID: 114832897818833608}
   m_Layer: 5
   m_Name: Card
   m_TagString: PassengerCard
@@ -299,8 +300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e84112cbabbba843bdfa034fbe050d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dragging: 0
   lineDrawer: {fileID: 0}
+  dragging: 0
 --- !u!114 &114345820207474292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -415,6 +416,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114832897818833608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1549927430046094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1573420865, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 7, y: -5}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114957183561711082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -629,7 +644,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 17}
-  m_SizeDelta: {x: 180, y: 150}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224784942093845322
 RectTransform:

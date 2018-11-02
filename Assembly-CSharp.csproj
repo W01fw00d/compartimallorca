@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Instantiables\ComplexRoute.cs" />
     <Compile Include="Assets\Scripts\Instantiables\SimpleRoute.cs" />
     <Compile Include="Assets\Scripts\LineDrawer.cs" />
+    <Compile Include="Assets\Scripts\MenuManager.cs" />
     <Compile Include="Assets\Scripts\TransformExtensions.cs" />
     <None Include="Assets\Scripts\Content\passengers_comments.xml" />
     <None Include="Assets\Scripts\Content\simple_routes.xml" />
