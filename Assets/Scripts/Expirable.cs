@@ -24,7 +24,7 @@ public class Expirable :
 
     private Color black = new Color(0, 0, 0, 1);
     private Color red = new Color(0.8f, 0, 0, 1);
-    private Color originalColor = new Color(1, 1, 1, 1); //White
+    private Color originalColor;
     private Color mouseOverColor = new Color(1, 1, 0, 1); //yellow
     private Color correctLinkColor = new Color(0, 1, 0.5f, 1); //green
     private Color incorrectLinkColor = new Color(0.8f, 0, 0, 1); //red
@@ -35,26 +35,26 @@ public class Expirable :
     private bool isPassengerCardRouteMatching = false;
     private GameManager gameManager;
 
+    private AudioSource carOnAudio;
+    private AudioSource carOffAudio;
+
     public int basePoints;
-    //private int expiration_time;
-    //private int n_slots;
-    //private int occupied_n_slots = 0;
-    //private int max_n_slots = 3;
 
     void Start()
     {
+        originalColor = GetComponent<Image>().color;
+
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        carOnAudio = GameObject.Find("CarOnAudio").GetComponent<AudioSource>();
+        carOffAudio = GameObject.Find("CarOffAudio").GetComponent<AudioSource>();
+        // ToDo play when necessary
+
         xOriginal = transform.position.x;
         yOriginal = transform.position.y;
 
         Transform panel = gameObject.transform.Find("CharacterAvatar");
         timerText = panel.Find("TimerText").gameObject.GetComponent<Text>();
-
-        //Transform slots_wrapper = panel.Find("SeatsSlotsWrapper");
-        //for (int i = 1; i <= n_seatSlots; i++)
-        //{
-        //    slots_wrapper.transform.Find("SeatSlot" + i).gameObject.SetActive(true);
-        //}
     }
 
     void Update () {
@@ -160,7 +160,10 @@ public class Expirable :
     private int GetPoints(bool isCarCompleted)
     {
         int basePoints = 200;
-        int bonusForCompletion = isCarCompleted ? 2 : 1;
+        int bonusForCompletion = isCarCompleted ? 2 : 1; // More points if all seats are occupied
+        int bonusForSpeed = isCarCompleted ? 
+            (int)(expires_in / expirationLimit * 100) : // More points if card was managed quickly
+            0;
 
         //Debug.Log("Seats Points");
         //Debug.Log(basePoints * transform.FindObjectsWithTag("OccupiedSeat").Count);
@@ -173,8 +176,8 @@ public class Expirable :
 
         return
             (basePoints * bonusForCompletion * transform.FindObjectsWithTag("OccupiedSeat").Count)
-            - (int)expirationLimit
-            - (int)expires_in
+            //- (int)expirationLimit // More points for cards with little expiration max time
+            + bonusForSpeed
         ;
     }
 
@@ -249,10 +252,11 @@ public class Expirable :
             occupiedSeat.GetComponent<Image>().sprite = blankSprite;
         }
 
-        List<GameObject> seatSlots = gameObject.transform.FindObjectsWithTag("SeatSlot");
-        foreach (GameObject seatSlot in seatSlots)
+        List<GameObject> blockedSeatSlots = gameObject.transform.FindObjectsWithTag("BlockedSeat");
+        foreach (GameObject blockedSeatSlot in blockedSeatSlots)
         {
-            seatSlot.SetActive(true);
+            blockedSeatSlot.tag = "EmptySeat";
+            blockedSeatSlot.SetActive(true);
         }
 
         ResetPosition();
@@ -266,11 +270,13 @@ public class Expirable :
 
     private void Launch()
     {
+
         AnimateMovement(-1);
     }
 
     public void Fall()
     {
+
         AnimateMovement(1);
     }
 

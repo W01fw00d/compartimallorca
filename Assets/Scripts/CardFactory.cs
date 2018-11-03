@@ -34,22 +34,8 @@ public class CardFactory : MonoBehaviour {
         TrackInactiveTaggedCarCards();
         TrackInactiveTaggedPassengerCards();
 
-        //Debug
-        //int count = 5;
-        //while (count > 0)
-        //{
         CreateCarCard();
-        //    count--;
-        //}
-        //
-        //int count = 5;
-        //while (count > 0)
-        //{
-        //CreatePassengerCard();
-        //CreatePassengerCard();
-        //    count--;
-        //}
-        //
+        CreatePassengerCard();
 
         float carCreationPeriod = 5.0F; //Balanced 5.0F
         float passengerCreationPeriod = 10.0F; //Balanced 10.0F
