@@ -33,6 +33,7 @@ public class Expirable :
     private float timerColorChangeLimit = 10.0f;
     private GameObject passengerCard;
     private bool isPassengerCardRouteMatching = false;
+    private GameManager gameManager;
 
     public int basePoints;
     //private int expiration_time;
@@ -40,7 +41,9 @@ public class Expirable :
     //private int occupied_n_slots = 0;
     //private int max_n_slots = 3;
 
-    void Start() {
+    void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         xOriginal = transform.position.x;
         yOriginal = transform.position.y;
 
@@ -147,7 +150,7 @@ public class Expirable :
         //Debug.Log(points);
         //Debug.Log("------------");
 
-        GameObject.Find("GameManager").GetComponent<GameManager>().AddPoints(
+        gameManager.AddPoints(
             points
         );
 

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     public bool isGameOn = false;
 
     private GameObject draggedCard;
+    private CardFactory cardFactory;
 
     private GameObject gameOverText;
     private GameObject gameOverButton;
@@ -47,6 +48,8 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
+        cardFactory = GameObject.Find("CardFactory").GetComponent<CardFactory>();
+
         isGameOn = true;
 
         gameOverText = GameObject.Find("GameOverText");
@@ -91,6 +94,23 @@ public class GameManager : MonoBehaviour {
         pointsAddedText.GetComponent<Text>().text = "+" + points;
         pointsAddedText.SetActive(true);
         Invoke("HidePointsAddedText", 5.0f);
+    }
+
+    public void PaintBackgroundByInactivePassengerCards()
+    {
+        PaintBackground(cardFactory.GetInactivePassengerCards().Count);
+    }
+
+    public void PaintBackground(float opacityFactor)
+    {
+        Color color = new Color(1, 1, 1, opacityFactor * 0.2F);
+
+        SpriteRenderer background = GameObject.Find("Background").GetComponent<SpriteRenderer>();
+
+        if (background.color != color)
+        {
+            background.color = color;
+        }
     }
 
     private void FallAllActiveCards()

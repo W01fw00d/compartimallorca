@@ -22,10 +22,16 @@ class Draggable :
     private float distance;
     private GameObject carCard;
 
+    public bool cardActive = false;
+
     //private int points;
+
+    private GameManager gameManager;
 
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         ResetCard();
     }
 
@@ -89,6 +95,9 @@ class Draggable :
         if (carCard && carCard.GetComponent<Expirable>().TryEnterCar(gameObject))
         {
             gameObject.SetActive(false);
+            cardActive = false;
+            gameManager.PaintBackgroundByInactivePassengerCards();
+
             lineDrawer.ClearPassengerRoute(
                 simpleRoute
             );
@@ -150,6 +159,7 @@ class Draggable :
     {
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         gameObject.SetActive(false);
+        cardActive = false;
         ResetPosition();
     }
 

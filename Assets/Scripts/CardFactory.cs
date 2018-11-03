@@ -18,6 +18,9 @@ public class CardFactory : MonoBehaviour {
     private string simpleRoutesXMLPath = "Assets/Scripts/Content/simple_routes.xml";
     private int simpleRoutesXMLLength = 13;
 
+    //private Color danger = new Color(1, 0, 0.08203983F, 0.5176471F); //red
+    //private Color cardSlotColor = new Color(1, 1, 1, 0.1568628F); //semitranslucid white
+
     private GameObject[] carCards;
     private GameObject[] passengerCards;
 
@@ -35,24 +38,24 @@ public class CardFactory : MonoBehaviour {
         //int count = 5;
         //while (count > 0)
         //{
-        //    CreateCarCard();
+        CreateCarCard();
         //    count--;
         //}
         //
         //int count = 5;
         //while (count > 0)
         //{
-        //    CreatePassengerCard();
-
+        //CreatePassengerCard();
+        //CreatePassengerCard();
         //    count--;
         //}
         //
 
-        float period = 0.5F;
-        float passengerCreationSlowFactor = 1.5F;
+        float carCreationPeriod = 5.0F; //Balanced 5.0F
+        float passengerCreationPeriod = 10.0F; //Balanced 10.0F
 
-        StartCoroutine(CreateCarCardRoutine(period));
-        StartCoroutine(CreatePassengerCardRoutine(period * passengerCreationSlowFactor));
+        StartCoroutine(CreateCarCardRoutine(carCreationPeriod));
+        StartCoroutine(CreatePassengerCardRoutine(passengerCreationPeriod));
     }
 
     IEnumerator CreateCarCardRoutine(float waitTime)
@@ -60,16 +63,36 @@ public class CardFactory : MonoBehaviour {
         while (gameManager.isGameOn)
         {
             yield return new WaitForSeconds(waitTime);
-            CreateCarCard();
+
+            if (gameManager.isGameOn)
+            {
+                CreateCarCard();
+            }
         }
     }
 
     IEnumerator CreatePassengerCardRoutine(float waitTime)
     {
+        float minWaitTime = 1.0F;
+
+        int counter = 0;
+        int speedUpFrequency = 360; //Balanced 360
+        float speedUpFactor = 0.1F; //Balanced 0.1F
+
         while (gameManager.isGameOn)
         {
+            if (
+                waitTime >= minWaitTime &&
+                counter % speedUpFrequency == 0
+            ) {
+                waitTime -= speedUpFactor;
+            }
+
             yield return new WaitForSeconds(waitTime);
-            CreatePassengerCard();
+            if (gameManager.isGameOn)
+            {
+                CreatePassengerCard();
+            }
         }
     }
 
@@ -130,7 +153,9 @@ public class CardFactory : MonoBehaviour {
     private void SetCarCardSeatSlotsRandom(GameObject characterAvatar)
     {
         List<GameObject> seatSlotGameObjects = characterAvatar.gameObject.transform.FindObjectsWithTag("EmptySeat");
-        int n_seatSlots = (int)Math.Round(UnityEngine.Random.value * 2);
+        int n_seatSlots = (int)Math.Round(UnityEngine.Random.value * (seatSlotGameObjects.Count - 1));
+
+        //Debug.Log(n_seatSlots); // BUGG HERE??
 
         while (n_seatSlots > 0)
         {
@@ -187,12 +212,14 @@ public class CardFactory : MonoBehaviour {
                 newCard.GetComponent<Draggable>().simpleRoute.Destination;
 
             newCard.gameObject.SetActive(true);
+            newCard.GetComponent<Draggable>().cardActive = true;
 
-            GameObject nextCard = GetFirstInactivePassengerCard();
+            int n_nextCards = GetInactivePassengerCards().Count;
+            gameManager.PaintBackground(n_nextCards);
 
-            if (nextCard == null)
+            if (n_nextCards == 0)
             {
-                GameObject.Find("GameManager").GetComponent<GameManager>().LaunchGameOverSequence();
+                gameManager.LaunchGameOverSequence();
             }
 
         } else
@@ -200,6 +227,19 @@ public class CardFactory : MonoBehaviour {
             //Debug.Log("Cannot find any car card; cannot create a new passenger card");
         }
     }
+
+    //private void PaintPassengerSlots(Color color)
+    //{
+    //    GameObject[] passengerCardSlots = GameObject.FindGameObjectsWithTag("PassengerCardSlot");
+
+    //    if (passengerCardSlots[0].GetComponent<Image>().color != color)
+    //    {
+    //        foreach (GameObject passengerCardSlot in passengerCardSlots)
+    //        {
+    //            passengerCardSlot.GetComponent<Image>().color = color;
+    //        }
+    //    }
+    //}
 
     private SimpleRoute GetRandomSimpleRoute()
     {
@@ -346,9 +386,6 @@ public class CardFactory : MonoBehaviour {
             }
         }
 
-        Debug.Log(carCards.Length);
-        Debug.Log(inactiveCards.Count);
-
         if (inactiveCards.Count > 0)
         {
             return inactiveCards[0];
@@ -382,15 +419,7 @@ public class CardFactory : MonoBehaviour {
 
     private GameObject GetFirstInactivePassengerCard()
     {
-        List<GameObject> inactiveCards = new List<GameObject>();
-
-        foreach (GameObject card in passengerCards)
-        {
-            if (!card.activeSelf)
-            {
-                inactiveCards.Add(card);
-            }
-        }
+        List<GameObject> inactiveCards = GetInactivePassengerCards();
 
         if (inactiveCards.Count > 0)
         {
@@ -400,5 +429,20 @@ public class CardFactory : MonoBehaviour {
         {
             return null;
         }
+    }
+
+    public List<GameObject> GetInactivePassengerCards()
+    {
+        List<GameObject> inactiveCards = new List<GameObject>();
+
+        foreach (GameObject card in passengerCards)
+        {
+            if (!card.GetComponent<Draggable>().cardActive)
+            {
+                inactiveCards.Add(card);
+            }
+        }
+
+        return inactiveCards;
     }
 }
