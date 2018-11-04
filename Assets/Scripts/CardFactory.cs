@@ -31,11 +31,11 @@ public class CardFactory : MonoBehaviour
         TrackInactiveTaggedCarCards();
         TrackInactiveTaggedPassengerCards();
 
-        CreateCarCard(); 
-        CreatePassengerCard();
+        //CreateCarCard(); 
+        //CreatePassengerCard();
 
         float carCreationPeriod = 5.0F; //Balanced 5.0F
-        float passengerCreationPeriod = 4.0F; //Balanced 10.0F
+        float passengerCreationPeriod = 10.0F; //Balanced 10.0F
 
         createCardCarCoroutine = StartCoroutine(CreateCarCardRoutine(carCreationPeriod));
         createPassengerCarCoroutine = StartCoroutine(CreatePassengerCardRoutine(passengerCreationPeriod));
@@ -55,8 +55,8 @@ public class CardFactory : MonoBehaviour
         float minWaitTime = 1.0F;
 
         int counter = 0;
-        int speedUpFrequency = 100; //Balanced 5?
-        float speedUpFactor = 0; //Balanced 0.1F
+        int speedUpFrequency = 6; //Balanced <=6?
+        float speedUpFactor = 0.1F; //Balanced 0.1F
 
         while (true)
         {
@@ -72,6 +72,11 @@ public class CardFactory : MonoBehaviour
 
             counter++;
         }
+    }
+
+    public void AddFreeSprite(Sprite sprite)
+    {
+        freeSprites.Add(sprite);
     }
 
     private void StopCreateCardCoroutines()
@@ -125,6 +130,7 @@ public class CardFactory : MonoBehaviour
 
         newCard.gameObject.SetActive(true);
         newCard.gameObject.GetComponent<Expirable>().cardActive = true;
+        newCard.GetComponent<Expirable>().FadeIn();
     }
 
     private void SetCarCardRandomTimer(GameObject newCard)
@@ -196,13 +202,15 @@ public class CardFactory : MonoBehaviour
             newCard.gameObject.SetActive(true);
             newCard.GetComponent<Draggable>().cardActive = true;
 
+            newCard.GetComponent<Draggable>().FadeIn();
+
             // Unificar este bloque con el de GameManager
             int n_nextCards = GetInactivePassengerCards().Count;
             gameManager.PaintBackground(n_nextCards);
 
             if (n_nextCards == 0)
             {
-                StopCreateCardCoroutines();
+                gameManager.ShowGameOverText();
                 gameManager.LaunchGameOverSequence();
             }
             else if (n_nextCards == 1)

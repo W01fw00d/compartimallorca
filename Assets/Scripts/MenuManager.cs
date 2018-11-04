@@ -9,6 +9,18 @@ public class MenuManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         GameObject.Find("IntroText").GetComponent<Text>().CrossFadeAlpha(0.0f, 0.0f, false);
+
+        GameObject.Find("TitleText").GetComponent<Text>().CrossFadeAlpha(0.0f, 0.0f, false);
+
+        GameObject.Find("StartButton").GetComponent<Image>().CrossFadeAlpha(0.0f, 0.0f, false);
+        GameObject.Find("TutorialButton").GetComponent<Image>().CrossFadeAlpha(0.0f, 0.0f, false);
+        GameObject.Find("ExitButton").GetComponent<Image>().CrossFadeAlpha(0.0f, 0.0f, false);
+        float fadeInTime = 2.0F;
+        GameObject.Find("TitleText").GetComponent<Text>().CrossFadeAlpha(1.0f, fadeInTime, false);
+
+        GameObject.Find("StartButton").GetComponent<Image>().CrossFadeAlpha(1.0f, fadeInTime, false);
+        GameObject.Find("TutorialButton").GetComponent<Image>().CrossFadeAlpha(1.0f, fadeInTime, false);
+        GameObject.Find("ExitButton").GetComponent<Image>().CrossFadeAlpha(1.0f, fadeInTime, false);
     }
 
     // Update is called once per frame

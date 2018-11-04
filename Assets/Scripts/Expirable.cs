@@ -34,6 +34,7 @@ public class Expirable :
     private GameObject passengerCard;
     private bool isPassengerCardRouteMatching = false;
     private GameManager gameManager;
+    private CardFactory cardFactory;
 
     private AudioSource carOnAudio;
     private AudioSource carOffAudio;
@@ -45,6 +46,7 @@ public class Expirable :
         originalColor = GetComponent<Image>().color;
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        cardFactory = GameObject.Find("CardFactory").GetComponent<CardFactory>();
 
         carOnAudio = GameObject.Find("CarOnAudio").GetComponent<AudioSource>();
         carOffAudio = GameObject.Find("CarOffAudio").GetComponent<AudioSource>();
@@ -114,12 +116,15 @@ public class Expirable :
             GameObject emptySeat = transform.FindObjectsWithTag("EmptySeat")[0].gameObject;
 
             emptySeat.gameObject.GetComponent<Image>().sprite = colliderCardAvatar;
+            cardFactory.AddFreeSprite(colliderCardAvatar);
+
             emptySeat.tag = "OccupiedSeat";
 
             UnlinkAny();
 
             if (!ExistEmptySeats())
             {
+                cardFactory.AddFreeSprite(gameObject.transform.FindObjectsWithTag("CharacterAvatar")[0].gameObject.GetComponent<Image>().sprite);
                 LaunchCar(true);
             }
 
@@ -129,6 +134,49 @@ public class Expirable :
         {
             return false;
         }
+    }
+
+    public void FadeIn()
+    {
+        gameObject.GetComponent<Image>().CrossFadeAlpha(0.0f, 0.0f, true);
+        gameObject.GetComponent<Image>().CrossFadeAlpha(1.0f, 1.0f, true);
+
+        FadeInChildrenByName("Panel");
+        FadeInChildrenByName("CharacterAvatar");
+        FadeInCharacterAvatarTextChildrenByName("CharacterText");
+        FadeInCharacterAvatarTextChildrenByName("TimerText");
+
+
+        FadeInRouteTextChildrenByName("FromText");
+        FadeInRouteTextChildrenByName("ArrowFakeIcon");
+        FadeInRouteTextChildrenByName("ToText");
+    }
+
+    private void FadeInChildrenByName(string childrenName)
+    {
+        gameObject.transform.Find(childrenName).GetComponent<Image>().CrossFadeAlpha(0.0f, 0.0f, true);
+        gameObject.transform.Find(childrenName).GetComponent<Image>().CrossFadeAlpha(1.0f, 1.0f, true);
+    }
+
+    private void FadeInCharacterAvatarTextChildrenByName(string childrenName)
+    {
+        gameObject.transform.Find("CharacterAvatar").transform.Find(childrenName).GetComponent<Text>().CrossFadeAlpha(0.0f, 0.0f, true);
+        gameObject.transform.Find("CharacterAvatar").transform.Find(childrenName).GetComponent<Text>().CrossFadeAlpha(1.0f, 1.0f, true);
+    }
+
+    private void FadeInSeatSlots()
+    {
+        Transform seatsSlotsWrapper = gameObject.transform.Find("CharacterAvatar").Find("SeatsSlotsWrapper");
+
+        seatsSlotsWrapper.Find("SeatSlot1").GetComponent<Image>().CrossFadeAlpha(0.0f, 0.0f, true);
+        seatsSlotsWrapper.Find("SeatSlot2").GetComponent<Image>().CrossFadeAlpha(0.0f, 0.0f, true);
+        seatsSlotsWrapper.Find("SeatSlot3").GetComponent<Image>().CrossFadeAlpha(0.0f, 0.0f, true);
+    }
+
+    private void FadeInRouteTextChildrenByName(string childrenName)
+    {
+        gameObject.transform.Find("Route").transform.Find(childrenName).GetComponent<Text>().CrossFadeAlpha(0.0f, 0.0f, true);
+        gameObject.transform.Find("Route").transform.Find(childrenName).GetComponent<Text>().CrossFadeAlpha(1.0f, 1.0f, true);
     }
 
     private void LaunchCar(bool isCompleted)
@@ -217,6 +265,7 @@ public class Expirable :
                 carOffAudio.Play();
             }
 
+            cardFactory.AddFreeSprite(gameObject.transform.FindObjectsWithTag("CharacterAvatar")[0].gameObject.GetComponent<Image>().sprite);
             UnlinkAny();
 
         } else

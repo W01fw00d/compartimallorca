@@ -134,6 +134,37 @@ class Draggable :
         AnimateMovement(1);
     }
 
+    public void FadeIn()
+    {
+        gameObject.GetComponent<Image>().CrossFadeAlpha(0.0f, 0.0f, true);
+        gameObject.GetComponent<Image>().CrossFadeAlpha(1.0f, 1.0f, true);
+
+        FadeInChildrenByName("Panel");
+        FadeInChildrenByName("CharacterAvatar");
+        FadeInCharacterAvatarTextChildrenByName("CharacterText");
+        FadeInRouteTextChildrenByName("FromText");
+        FadeInRouteTextChildrenByName("ArrowFakeIcon");
+        FadeInRouteTextChildrenByName("ToText");
+    }
+
+    private void FadeInChildrenByName(string childrenName)
+    {
+        gameObject.transform.Find(childrenName).GetComponent<Image>().CrossFadeAlpha(0.0f, 0.0f, true);
+        gameObject.transform.Find(childrenName).GetComponent<Image>().CrossFadeAlpha(1.0f, 1.0f, true);
+    }
+
+    private void FadeInCharacterAvatarTextChildrenByName(string childrenName)
+    {
+        gameObject.transform.Find("CharacterAvatar").transform.Find(childrenName).GetComponent<Text>().CrossFadeAlpha(0.0f, 0.0f, true);
+        gameObject.transform.Find("CharacterAvatar").transform.Find(childrenName).GetComponent<Text>().CrossFadeAlpha(1.0f, 1.0f, true);
+    }
+
+    private void FadeInRouteTextChildrenByName(string childrenName)
+    {
+        gameObject.transform.Find("Route").transform.Find(childrenName).GetComponent<Text>().CrossFadeAlpha(0.0f, 0.0f, true);
+        gameObject.transform.Find("Route").transform.Find(childrenName).GetComponent<Text>().CrossFadeAlpha(1.0f, 1.0f, true);
+    }
+
     private void ResetCard()
     {
         originalColor = GetComponent<Image>().color;

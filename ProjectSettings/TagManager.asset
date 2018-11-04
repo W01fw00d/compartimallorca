@@ -13,6 +13,9 @@ TagManager:
   - OccupiedSeat
   - BlockedSeat
   - EmptySeat
+  - PassengerCardSlot
+  - City
+  - CarCardSlot
   layers:
   - Default
   - TransparentFX

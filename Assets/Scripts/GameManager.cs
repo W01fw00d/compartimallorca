@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour {
 
     private int totalPoints;
 
-    private bool isGameOverTextBlinking = false;
-
     private Coroutine showBlinkingGameOverTextCoroutine;
 
     public GameObject DraggedCard
@@ -51,6 +49,12 @@ public class GameManager : MonoBehaviour {
     }
 
     void Start()
+    {
+        LaunchGameStartSequence(2.0F);
+        StartGame();
+    }
+
+    private void StartGame()
     {
         cardFactory = GameObject.Find("CardFactory").GetComponent<CardFactory>();
 
@@ -91,10 +95,37 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    //public void LaunchGameStartSequence()
-    //{
+    public void LaunchGameStartSequence(float fadeIntime)
+    {
+        Text pointsText = GameObject.Find("CitiesCanvas").transform.
+            Find("PointsText").GetComponent<Text>();
 
-    //}
+        pointsText.CrossFadeAlpha(0.0f, 0.0f, true);
+        pointsText.CrossFadeAlpha(1.0f, fadeIntime, true);
+
+        List<GameObject> cities = GameObject.Find("CitiesCanvas").transform.Find("Cities").FindObjectsWithTag("City");
+
+        foreach(GameObject city in cities)
+        {
+            city.GetComponent<Image>().CrossFadeAlpha(0.0f, 0.0f, true);
+            city.GetComponent<Image>().CrossFadeAlpha(1.0f, fadeIntime, true);
+        }
+
+        FadeInCardSlots("CarsColumn", "CarCardSlot", fadeIntime);
+        FadeInCardSlots("PassengersColumn", "PassengerCardSlot", fadeIntime);
+    }
+
+    private void FadeInCardSlots(string columnName, string slotTag, float fadeIntime)
+    {
+        List<GameObject> cardSlots =
+            GameObject.Find(columnName).transform.Find("CardsWrapper").transform.FindObjectsWithTag(slotTag);
+
+        foreach (GameObject cardSlot in cardSlots)
+        {
+            cardSlot.GetComponent<Image>().CrossFadeAlpha(0.0f, 0.0f, true);
+            cardSlot.GetComponent<Image>().CrossFadeAlpha(1.0f, fadeIntime, true);
+        }
+    }
 
     public void LaunchGameOverSequence()
     {
