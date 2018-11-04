@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour {
 
     private int totalPoints;
 
+    private bool isGameOverTextBlinking = false;
+
+    private Coroutine showBlinkingGameOverTextCoroutine;
+
     public GameObject DraggedCard
     {
         get
@@ -54,7 +58,6 @@ public class GameManager : MonoBehaviour {
 
         gameOverText = GameObject.Find("GameOverText");
         gameOverText.SetActive(false);
-        //gameOverText.GetComponent<Text>().CrossFadeAlpha(0.0f, 0.0f, false);
 
         gameOverButtonText = GameObject.Find("GameOverButtonText");
         gameOverButtonText.SetActive(false);
@@ -64,7 +67,22 @@ public class GameManager : MonoBehaviour {
         gameOverButton.GetComponent<Image>().CrossFadeAlpha(0.0f, 0.0f, false);
     }
 
-    // Update is called once per frame
+    IEnumerator ShowBlinkingGameOverText(float waitTime)
+    {
+        while (true)
+        {
+            gameOverText.GetComponent<Text>().CrossFadeAlpha(1.0f, 1.0f, true);
+            
+            Invoke("Hide", 1.1F);
+            yield return new WaitForSeconds(waitTime);
+        }
+    }
+
+    private void Hide()
+    {
+        gameOverText.GetComponent<Text>().CrossFadeAlpha(0.0f, 1.0f, true);
+    }
+
     void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.Escape))
@@ -81,9 +99,9 @@ public class GameManager : MonoBehaviour {
     public void LaunchGameOverSequence()
     {
         isGameOn = false;
-        FallAllActiveCards(); // Tirar tarjetas para abajo
+        FallAllActiveCards();
         FallCities();
-        Invoke("ShowGameOverUI", 3.0f); // Mostrar gameover
+        Invoke("ShowGameOverUI", 3.0f);
     }
 
     public void AddPoints(int points)
@@ -115,23 +133,50 @@ public class GameManager : MonoBehaviour {
 
     public void ShowGameOverTextByInactivePassengerCards()
     {
-        if (cardFactory.GetInactivePassengerCards().Count == 1)
+        int n_inactive_cards = cardFactory.GetInactivePassengerCards().Count;
+
+        if (n_inactive_cards == 1)
+        {
+            StartCoroutineShowBlinkingGameOverText();
+        } else if (n_inactive_cards == 2)
         {
             ShowGameOverText();
-        } else
+        }
+        else
         {
             HideGameOverText();
         }
     }
 
+    public void StartCoroutineShowBlinkingGameOverText()
+    {
+        if (showBlinkingGameOverTextCoroutine == null)
+        {
+            gameOverText.SetActive(true);
+
+            showBlinkingGameOverTextCoroutine = StartCoroutine(ShowBlinkingGameOverText(2.2F));
+        }
+    }
+
+    private void StopCoroutineShowBlinkingGameOverText()
+    {
+        if (showBlinkingGameOverTextCoroutine != null)
+        {
+            StopCoroutine(showBlinkingGameOverTextCoroutine);
+            showBlinkingGameOverTextCoroutine = null;
+        }
+    }
+
     public void ShowGameOverText()
     {
+        StopCoroutineShowBlinkingGameOverText();
         gameOverText.SetActive(true);
         gameOverText.GetComponent<Text>().CrossFadeAlpha(1.0f, 2.0f, false);
     }
 
     public void HideGameOverText()
     {
+        StopCoroutineShowBlinkingGameOverText();
         gameOverText.SetActive(false);
         gameOverText.GetComponent<Text>().CrossFadeAlpha(0.0f, 2.0f, false);
     }
@@ -158,8 +203,6 @@ public class GameManager : MonoBehaviour {
 
     private void ShowGameOverUI()
     {
-        //gameOverText.SetActive(true);
-        //gameOverText.GetComponent<Text>().CrossFadeAlpha(1.0f, 2.0f, false);
         gameOverButton.SetActive(true);
         gameOverButton.GetComponent<Image>().CrossFadeAlpha(1.0f, 2.0f, false);
         gameOverButtonText.SetActive(true);

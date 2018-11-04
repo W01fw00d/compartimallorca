@@ -6,11 +6,8 @@ using System;
 using System.Xml;
 using System.IO;
 
-public class CardFactory : MonoBehaviour {
-
-    //private int nCarCardsLimit = 5;
-    //private int nPassengerCardsLimit = 5;
-
+public class CardFactory : MonoBehaviour
+{
     public Sprite blankSprite;
     public List<Sprite> sprites;
     private List<Sprite> freeSprites;
@@ -18,13 +15,13 @@ public class CardFactory : MonoBehaviour {
     private string simpleRoutesXMLPath = "Assets/Scripts/Content/simple_routes.xml";
     private int simpleRoutesXMLLength = 13;
 
-    //private Color danger = new Color(1, 0, 0.08203983F, 0.5176471F); //red
-    //private Color cardSlotColor = new Color(1, 1, 1, 0.1568628F); //semitranslucid white
-
     private GameObject[] carCards;
     private GameObject[] passengerCards;
 
     private GameManager gameManager;
+
+    private Coroutine createCardCarCoroutine;
+    private Coroutine createPassengerCarCoroutine;
 
     void Start () {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -34,26 +31,22 @@ public class CardFactory : MonoBehaviour {
         TrackInactiveTaggedCarCards();
         TrackInactiveTaggedPassengerCards();
 
-        CreateCarCard();
+        CreateCarCard(); 
         CreatePassengerCard();
 
         float carCreationPeriod = 5.0F; //Balanced 5.0F
-        float passengerCreationPeriod = 10.0F; //Balanced 10.0F
+        float passengerCreationPeriod = 4.0F; //Balanced 10.0F
 
-        StartCoroutine(CreateCarCardRoutine(carCreationPeriod));
-        StartCoroutine(CreatePassengerCardRoutine(passengerCreationPeriod));
+        createCardCarCoroutine = StartCoroutine(CreateCarCardRoutine(carCreationPeriod));
+        createPassengerCarCoroutine = StartCoroutine(CreatePassengerCardRoutine(passengerCreationPeriod));
     }
 
     IEnumerator CreateCarCardRoutine(float waitTime)
     {
-        while (gameManager.isGameOn)
+        while (true)
         {
             yield return new WaitForSeconds(waitTime);
-
-            if (gameManager.isGameOn)
-            {
-                CreateCarCard();
-            }
+            CreateCarCard();
         }
     }
 
@@ -62,10 +55,10 @@ public class CardFactory : MonoBehaviour {
         float minWaitTime = 1.0F;
 
         int counter = 0;
-        int speedUpFrequency = 5; //Balanced 360
-        float speedUpFactor = 0.1F; //Balanced 0.1F
+        int speedUpFrequency = 100; //Balanced 5?
+        float speedUpFactor = 0; //Balanced 0.1F
 
-        while (gameManager.isGameOn)
+        while (true)
         {
             if (
                 waitTime >= minWaitTime &&
@@ -75,11 +68,16 @@ public class CardFactory : MonoBehaviour {
             }
 
             yield return new WaitForSeconds(waitTime);
-            if (gameManager.isGameOn)
-            {
-                CreatePassengerCard();
-            }
+            CreatePassengerCard();
+
+            counter++;
         }
+    }
+
+    private void StopCreateCardCoroutines()
+    {
+        StopCoroutine(createCardCarCoroutine);
+        StopCoroutine(createPassengerCarCoroutine);
     }
 
     private void TrackInactiveTaggedCarCards()
@@ -141,8 +139,6 @@ public class CardFactory : MonoBehaviour {
         List<GameObject> seatSlotGameObjects = characterAvatar.gameObject.transform.FindObjectsWithTag("EmptySeat");
         int n_seatSlots = (int)Math.Round(UnityEngine.Random.value * (seatSlotGameObjects.Count - 1));
 
-        //Debug.Log(n_seatSlots); // BUGG HERE??
-
         while (n_seatSlots > 0)
         {
             seatSlotGameObjects[n_seatSlots].SetActive(false);
@@ -200,17 +196,23 @@ public class CardFactory : MonoBehaviour {
             newCard.gameObject.SetActive(true);
             newCard.GetComponent<Draggable>().cardActive = true;
 
+            // Unificar este bloque con el de GameManager
             int n_nextCards = GetInactivePassengerCards().Count;
             gameManager.PaintBackground(n_nextCards);
 
             if (n_nextCards == 0)
             {
+                StopCreateCardCoroutines();
                 gameManager.LaunchGameOverSequence();
             }
             else if (n_nextCards == 1)
             {
+                gameManager.StartCoroutineShowBlinkingGameOverText();
+            }
+            else if (n_nextCards == 2)
+            {
                 gameManager.ShowGameOverText();
-            } 
+            }
             else
             {
                 gameManager.HideGameOverText();
@@ -221,19 +223,6 @@ public class CardFactory : MonoBehaviour {
             //Debug.Log("Cannot find any car card; cannot create a new passenger card");
         }
     }
-
-    //private void PaintPassengerSlots(Color color)
-    //{
-    //    GameObject[] passengerCardSlots = GameObject.FindGameObjectsWithTag("PassengerCardSlot");
-
-    //    if (passengerCardSlots[0].GetComponent<Image>().color != color)
-    //    {
-    //        foreach (GameObject passengerCardSlot in passengerCardSlots)
-    //        {
-    //            passengerCardSlot.GetComponent<Image>().color = color;
-    //        }
-    //    }
-    //}
 
     private SimpleRoute GetRandomSimpleRoute()
     {

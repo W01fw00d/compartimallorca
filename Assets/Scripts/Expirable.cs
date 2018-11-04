@@ -48,7 +48,6 @@ public class Expirable :
 
         carOnAudio = GameObject.Find("CarOnAudio").GetComponent<AudioSource>();
         carOffAudio = GameObject.Find("CarOffAudio").GetComponent<AudioSource>();
-        // ToDo play when necessary
 
         xOriginal = transform.position.x;
         yOriginal = transform.position.y;
@@ -76,29 +75,9 @@ public class Expirable :
         ClearRoute();
     }
 
-    public void OnTriggerStay2D(Collider2D collider)
-    {
-        if (
-            !passengerCard &&
-            collider.gameObject.GetComponent<Draggable>() &&
-            collider.gameObject.GetComponent<Draggable>().IsLinked(gameObject)
-        )
-        {
-            Link(collider.gameObject);
-        }
-    }
-
-    public void OnTriggerExit2D(Collider2D collision)
-    {
-        GetComponent<Image>().color = originalColor;
-        ClearRoute();
-        passengerCard = null;
-        isPassengerCardRouteMatching = false;
-    }
-
     public bool Link(GameObject linkingGameObject)
     {
-        if (!passengerCard)
+        if (cardActive)
         {
             passengerCard = linkingGameObject;
 
@@ -117,9 +96,17 @@ public class Expirable :
         return false;
     }
 
+    public void UnlinkAny()
+    {
+        GetComponent<Image>().color = originalColor;
+        ClearRoute();
+        passengerCard = null;
+        isPassengerCardRouteMatching = false;
+    }
+
     public bool TryEnterCar(GameObject passengerCard)
     {
-        if (CanEnterCar(passengerCard.GetComponent<Draggable>().simpleRoute))
+        if (cardActive && CanEnterCar(passengerCard.GetComponent<Draggable>().simpleRoute))
         {
             var colliderCardAvatar =
                 passengerCard.transform.FindObjectsWithTag("CharacterAvatar")[0].gameObject.GetComponent<Image>().sprite;
@@ -128,6 +115,8 @@ public class Expirable :
 
             emptySeat.gameObject.GetComponent<Image>().sprite = colliderCardAvatar;
             emptySeat.tag = "OccupiedSeat";
+
+            UnlinkAny();
 
             if (!ExistEmptySeats())
             {
@@ -228,6 +217,8 @@ public class Expirable :
                 carOffAudio.Play();
             }
 
+            UnlinkAny();
+
         } else
         {
             expires_in -= Time.deltaTime;
@@ -244,6 +235,7 @@ public class Expirable :
     {
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         cardActive = false;
+        UnlinkAny();
         gameObject.SetActive(false);
 
         List<GameObject> occupiedSeats = gameObject.transform.FindObjectsWithTag("OccupiedSeat");

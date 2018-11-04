@@ -24,8 +24,6 @@ class Draggable :
 
     public bool cardActive = false;
 
-    //private int points;
-
     private GameManager gameManager;
 
     void Start()
@@ -77,56 +75,58 @@ class Draggable :
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        //if (GameObject.Find("GameManager").GetComponent<GameManager>().DraggedCard == null)
-        //{
-            distance = Vector3.Distance(transform.position, Camera.main.transform.position);
-            dragging = true;
-            //MoveToFront();
-
-            //GameObject.Find("GameManager").GetComponent<GameManager>().DraggedCard = gameObject;
-        //}
+        distance = Vector3.Distance(transform.position, Camera.main.transform.position);
+        dragging = true;
+        //MoveToFront();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         dragging = false;
-        //GameObject.Find("GameManager").GetComponent<GameManager>().DraggedCard = null;
 
         if (carCard && carCard.GetComponent<Expirable>().TryEnterCar(gameObject))
         {
             gameObject.SetActive(false);
             cardActive = false;
             gameManager.PaintBackgroundByInactivePassengerCards();
-
+            gameManager.ShowGameOverTextByInactivePassengerCards();
             lineDrawer.ClearPassengerRoute(
                 simpleRoute
             );
         }
 
-        //Invoke("ResetPosition", 2.0f);
+        carCard = null;
         ResetPosition();
     }
 
+    public void OnTriggerEnter2D(Collider2D collider)
+    {
+        TryToLink(collider.gameObject);
+    }
 
     public void OnTriggerStay2D(Collider2D collider)
     {
-        if (!carCard && collider.gameObject.GetComponent<Expirable>())
-        {
-            carCard = collider.gameObject;
-            carCard.GetComponent<Expirable>().Link(gameObject);
+        TryToLink(collider.gameObject);
+    }
 
-            //We could do the TryEnterCar here and feedback the user about it
+    private void TryToLink(GameObject colliderGameObject)
+    {
+        if (carCard == null && colliderGameObject.GetComponent<Expirable>())
+        {
+            if (colliderGameObject.GetComponent<Expirable>().Link(gameObject))
+            {
+                carCard = colliderGameObject;
+            }
         }
     }
 
-    public void OnTriggerExit2D(Collider2D collision)
+    public void OnTriggerExit2D(Collider2D collider)
     {
-        carCard = null;
-    }
-
-    public bool IsLinked(GameObject gameObject)
-    {
-        return carCard == gameObject;
+        if (carCard != null && carCard == collider.gameObject)
+        {
+            carCard.GetComponent<Expirable>().UnlinkAny();
+            carCard = null;
+        }
     }
 
     public void Fall()
@@ -160,6 +160,7 @@ class Draggable :
         gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         gameObject.SetActive(false);
         cardActive = false;
+        carCard = null;
         ResetPosition();
     }
 
