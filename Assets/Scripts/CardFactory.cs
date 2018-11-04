@@ -62,7 +62,7 @@ public class CardFactory : MonoBehaviour {
         float minWaitTime = 1.0F;
 
         int counter = 0;
-        int speedUpFrequency = 360; //Balanced 360
+        int speedUpFrequency = 5; //Balanced 360
         float speedUpFactor = 0.1F; //Balanced 0.1F
 
         while (gameManager.isGameOn)
@@ -206,6 +206,14 @@ public class CardFactory : MonoBehaviour {
             if (n_nextCards == 0)
             {
                 gameManager.LaunchGameOverSequence();
+            }
+            else if (n_nextCards == 1)
+            {
+                gameManager.ShowGameOverText();
+            } 
+            else
+            {
+                gameManager.HideGameOverText();
             }
 
         } else

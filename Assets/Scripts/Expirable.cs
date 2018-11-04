@@ -225,6 +225,7 @@ public class Expirable :
             } else
             {
                 Fall();
+                carOffAudio.Play();
             }
 
         } else
@@ -270,13 +271,12 @@ public class Expirable :
 
     private void Launch()
     {
-
         AnimateMovement(-1);
+        carOnAudio.Play();
     }
 
     public void Fall()
     {
-
         AnimateMovement(1);
     }
 

@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
 
         gameOverText = GameObject.Find("GameOverText");
         gameOverText.SetActive(false);
-        gameOverText.GetComponent<Text>().CrossFadeAlpha(0.0f, 0.0f, false);
+        //gameOverText.GetComponent<Text>().CrossFadeAlpha(0.0f, 0.0f, false);
 
         gameOverButtonText = GameObject.Find("GameOverButtonText");
         gameOverButtonText.SetActive(false);
@@ -113,6 +113,29 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void ShowGameOverTextByInactivePassengerCards()
+    {
+        if (cardFactory.GetInactivePassengerCards().Count == 1)
+        {
+            ShowGameOverText();
+        } else
+        {
+            HideGameOverText();
+        }
+    }
+
+    public void ShowGameOverText()
+    {
+        gameOverText.SetActive(true);
+        gameOverText.GetComponent<Text>().CrossFadeAlpha(1.0f, 2.0f, false);
+    }
+
+    public void HideGameOverText()
+    {
+        gameOverText.SetActive(false);
+        gameOverText.GetComponent<Text>().CrossFadeAlpha(0.0f, 2.0f, false);
+    }
+
     private void FallAllActiveCards()
     {
         GameObject[] carCards = GameObject.FindGameObjectsWithTag("CarCard");
@@ -135,8 +158,8 @@ public class GameManager : MonoBehaviour {
 
     private void ShowGameOverUI()
     {
-        gameOverText.SetActive(true);
-        gameOverText.GetComponent<Text>().CrossFadeAlpha(1.0f, 2.0f, false);
+        //gameOverText.SetActive(true);
+        //gameOverText.GetComponent<Text>().CrossFadeAlpha(1.0f, 2.0f, false);
         gameOverButton.SetActive(true);
         gameOverButton.GetComponent<Image>().CrossFadeAlpha(1.0f, 2.0f, false);
         gameOverButtonText.SetActive(true);
