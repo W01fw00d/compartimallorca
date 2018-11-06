@@ -31,8 +31,12 @@ public class CardFactory : MonoBehaviour
         TrackInactiveTaggedCarCards();
         TrackInactiveTaggedPassengerCards();
 
-        //CreateCarCard(); 
-        //CreatePassengerCard();
+        CreateCarCard();
+        CreatePassengerCard();
+        CreatePassengerCard();
+        CreatePassengerCard();
+        CreatePassengerCard();
+        CreateCarCard();
 
         float carCreationPeriod = 5.0F; //Balanced 5.0F
         float passengerCreationPeriod = 10.0F; //Balanced 10.0F
@@ -76,10 +80,10 @@ public class CardFactory : MonoBehaviour
 
     public void AddFreeSprite(Sprite sprite)
     {
-        freeSprites.Add(sprite);
+        //freeSprites.Add(sprite);
     }
 
-    private void StopCreateCardCoroutines()
+    public void StopCreateCardCoroutines()
     {
         StopCoroutine(createCardCarCoroutine);
         StopCoroutine(createPassengerCarCoroutine);
@@ -359,7 +363,7 @@ public class CardFactory : MonoBehaviour
         {
             int sprite_index = (int) Math.Round(UnityEngine.Random.value * (freeSprites.Count - 1));
             sprite = freeSprites[sprite_index];
-            freeSprites.RemoveAt(sprite_index);
+            //freeSprites.RemoveAt(sprite_index);
         }
 
         return sprite;

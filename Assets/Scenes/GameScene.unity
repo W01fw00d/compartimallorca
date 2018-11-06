@@ -1047,25 +1047,6 @@ Prefab:
       propertyPath: m_Name
       value: CarCardSlot1
       objectReference: {fileID: 0}
-    - target: {fileID: 114014404984180988, guid: 5705645d5b8abe447baa5fe43ddb04a7,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114799189580604648, guid: 5705645d5b8abe447baa5fe43ddb04a7,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114828157870520850, guid: 5705645d5b8abe447baa5fe43ddb04a7,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1356814654665328, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
-      propertyPath: m_TagString
-      value: CarCardSlot
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5705645d5b8abe447baa5fe43ddb04a7, type: 2}
   m_IsPrefabAsset: 0
@@ -1785,16 +1766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blankSprite: {fileID: 21300000, guid: c59c5c57a19a9c04eae679d2489a31ac, type: 3}
   sprites:
-  - {fileID: 21300000, guid: abef8fe13d422cb49a75a916bccdb9c8, type: 3}
-  - {fileID: 21300000, guid: 1c59198b90260ef4aadbd94f737bf033, type: 3}
-  - {fileID: 21300000, guid: 113bc5c4b84b1784ba34c9ebf6310839, type: 3}
-  - {fileID: 21300000, guid: ad2f2d3385ffdd045b3d3d8ee064c163, type: 3}
-  - {fileID: 21300000, guid: 29f4bdea1b9c4e743a3a1c2ddcad0e0e, type: 3}
-  - {fileID: 21300000, guid: 68ca579ee2c48dc498aa68dcf9c720a6, type: 3}
-  - {fileID: 21300000, guid: f0fd3c1d7ec621f4fa85cafa08e162a8, type: 3}
-  - {fileID: 21300000, guid: f7bfcf6f95f2b9547803cbdd4eee6370, type: 3}
-  - {fileID: 21300000, guid: 12c68100b842fa341be81bbb737db2b8, type: 3}
-  - {fileID: 21300000, guid: 8566f0b004fddff45ac90e79f77c1665, type: 3}
+  - {fileID: 21300000, guid: 91f8f03a4a529ed43a6ee31328a02ed3, type: 3}
 --- !u!224 &915385682
 RectTransform:
   m_ObjectHideFlags: 0

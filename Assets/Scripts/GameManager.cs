@@ -130,6 +130,7 @@ public class GameManager : MonoBehaviour {
     public void LaunchGameOverSequence()
     {
         isGameOn = false;
+        cardFactory.StopCreateCardCoroutines();
         FallAllActiveCards();
         FallCities();
         Invoke("ShowGameOverUI", 3.0f);
