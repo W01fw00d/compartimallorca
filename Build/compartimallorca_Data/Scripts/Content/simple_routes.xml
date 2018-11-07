@@ -1,0 +1,15 @@
+<SimpleRoutes>
+	<Route index="0" from="Palma" to="Aeropuerto" />
+  <Route index="1" from="Palma" to="Inca" />
+  <Route index="2" from="Palma" to="Magaluf" />
+  <Route index="3" from="Palma" to="Banyalbufar" />
+  <Route index="4" from="Banyalbufar" to="Sóller" />
+  <Route index="5" from="Banyalbufar" to="Magaluf" />
+  <Route index="6" from="Sóller" to="Inca" />
+  <Route index="7" from="Inca" to="Alcúdia" />
+  <Route index="8" from="Inca" to="Manacor" />
+  <Route index="9" from="Aeropuerto" to="Campos" />
+  <Route index="10" from="Campos" to="Manacor" />
+  <Route index="11" from="Manacor" to="Artà" />
+  <Route index="12" from="Artà" to="Alcúdia" />
+</SimpleRoutes>

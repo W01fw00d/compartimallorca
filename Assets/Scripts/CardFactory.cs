@@ -12,7 +12,8 @@ public class CardFactory : MonoBehaviour
     public List<Sprite> sprites;
     private List<Sprite> freeSprites;
 
-    private string simpleRoutesXMLPath = "Assets/Scripts/Content/simple_routes.xml";
+    private string simpleRoutesXMLPath = "/Scripts/Content/simple_routes.xml";
+
     private int simpleRoutesXMLLength = 13;
 
     private GameObject[] carCards;
@@ -33,10 +34,6 @@ public class CardFactory : MonoBehaviour
 
         CreateCarCard();
         CreatePassengerCard();
-        CreatePassengerCard();
-        CreatePassengerCard();
-        CreatePassengerCard();
-        CreateCarCard();
 
         float carCreationPeriod = 5.0F; //Balanced 5.0F
         float passengerCreationPeriod = 10.0F; //Balanced 10.0F
@@ -273,7 +270,7 @@ public class CardFactory : MonoBehaviour
 
     private SimpleRoute GetSimpleRouteFromXMLByIndex(int route_index, bool hasInvertedDirection)
     {
-        XmlReader xmlReader = XmlReader.Create(simpleRoutesXMLPath);
+        XmlReader xmlReader = XmlReader.Create(Application.dataPath + simpleRoutesXMLPath);
         while (xmlReader.Read())
         {
             if ((xmlReader.NodeType == XmlNodeType.Element) && (xmlReader.Name == "Route"))
@@ -302,7 +299,7 @@ public class CardFactory : MonoBehaviour
 
     private SimpleRoute GetRandomSimpleRouteFromXMLByFrom(string from, string to)
     {
-        XmlReader xmlReader = XmlReader.Create(simpleRoutesXMLPath);
+        XmlReader xmlReader = XmlReader.Create(Application.dataPath + simpleRoutesXMLPath);
         List<SimpleRoute> matchingRoutes = new List<SimpleRoute>();
 
         while (xmlReader.Read())
