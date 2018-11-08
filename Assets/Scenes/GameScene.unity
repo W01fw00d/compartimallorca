@@ -1766,7 +1766,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blankSprite: {fileID: 21300000, guid: c59c5c57a19a9c04eae679d2489a31ac, type: 3}
   sprites:
-  - {fileID: 21300000, guid: 91f8f03a4a529ed43a6ee31328a02ed3, type: 3}
+  - {fileID: 21300000, guid: f67eda1ff122f7b4e801e288606c0383, type: 3}
+  - {fileID: 21300000, guid: bad3354945892eb4a82448a6b7cf5ac7, type: 3}
+  - {fileID: 21300000, guid: 7fc429d604b63f24d8bc763478652340, type: 3}
+  - {fileID: 21300000, guid: 66955a0af61069a40861e1dc653ae1a8, type: 3}
+  - {fileID: 21300000, guid: fbf0b1ab60ed426459ebc44b4ca256ab, type: 3}
+  - {fileID: 21300000, guid: c804939539908a74dbd6c8043ea03d03, type: 3}
+  - {fileID: 21300000, guid: 864ce6f42b1ef2f439cb0b5f4fb3bb24, type: 3}
+  - {fileID: 21300000, guid: f4568ea016734a14280a0310fae9d54c, type: 3}
+  - {fileID: 21300000, guid: 5b88b3cd89cad32439040efd2ae1c9bc, type: 3}
+  - {fileID: 21300000, guid: db08de5e0f0a8f246a8dd99ee8901024, type: 3}
 --- !u!224 &915385682
 RectTransform:
   m_ObjectHideFlags: 0
